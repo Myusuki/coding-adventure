@@ -52,17 +52,17 @@ void Dungeon1()
 
 void Dungeon1_Menu()
 {
-	printf( "With your flashlight you see a door straight ahead. What do you do?" );
-	printf( "1) Go straight to the door and open it." );
-	printf( "2) Explore the bottom left corner of the place." );
-	printf( "3) Explore the bottom right corner of the place." );
-	printf( "4) Explore the center of the place." );
-	printf( "5) Explore the center left of the place." );
-	printf( "6) Explore the center right of the place." );
-	printf( "7) Explore the top left corner of the place." );
-	printf( "8) Explore the top center of the place." );
-	printf( "9) Explore the top right corner of the place." );
-	printf( "0) Explore where you're standing currently." );
+	printf( "With your flashlight you see a door straight ahead. What do you do?\n" );
+	printf( "1) Go straight to the door and open it.\n" );
+	printf( "2) Explore the bottom left corner of the place.\n" );
+	printf( "3) Explore the bottom right corner of the place.\n" );
+	printf( "4) Explore the center of the place.\n" );
+	printf( "5) Explore the center left of the place.\n" );
+	printf( "6) Explore the center right of the place.\n" );
+	printf( "7) Explore the top left corner of the place.\n" );
+	printf( "8) Explore the top center of the place.\n" );
+	printf( "9) Explore the top right corner of the place.\n" );
+	printf( "0) Explore where you're standing currently.\n" );
 }
 
 void Dungeon1_Block1()
