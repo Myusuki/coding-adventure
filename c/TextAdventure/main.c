@@ -1,7 +1,10 @@
 #include <stdio.h>
+#include "./Dungeon1.h"
+
 
 int main(int argc, char *argv[])
 {
+	// Intro
 	printf( "Beep! Beep! Beep!" );
 	printf( "It's a Saturday morning. You wake up, reluctant to get out of bed." );
 	printf( "The sun shines brightly through your berdroom window." );
@@ -22,7 +25,14 @@ int main(int argc, char *argv[])
 	printf( "You get out of bed, eager to go explore the mountain. You perform your same old boring morning routine with haste." );
 	printf( "With the morning routine out of the way, you start packing your backpack meticulously. Prepping little but well enough for your spontaneous journey." );
 	printf( "Arriving at the mountain by bike, nothing seems to be out of the ordinary." );
-	printf( "Taking a closer look around, you wonder if the rumor is a fallacy." );
+	printf( "Taking a closer look around, you wonder if the rumor was no more than a fallacy." );
 	printf( "But since you've already arrived. You decide to walk around. Maybe something will pop up unexpectedly." );
 	printf( "After much sightseeing and walking, you stumble upon a cave." );
+	
+	printf( "As there's nothing unusual around the mountain, you shrug your shoulders, grab your flashlight and enter the cave." );
+
+	// Dungeon number 1
+	Dungeon1();
+
+		return 0;
 }
