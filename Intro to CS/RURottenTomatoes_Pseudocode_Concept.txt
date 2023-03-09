@@ -1,0 +1,17 @@
+for i = 0; i++
+	for j = 0; j++
+		Assign ratings to their respective reviewers and movies
+	ENDFOR
+ENDFOR 
+
+for i = 0; i++
+	for j = 0; j++
+		find the highest ratings and insert the movie index to an array
+	ENDFOR
+ENDFOR
+
+for i = 0; i++
+	compare which movie index number is larger in the array 
+ENDFOR
+
+DIPSLAY movie index

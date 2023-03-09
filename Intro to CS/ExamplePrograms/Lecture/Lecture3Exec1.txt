@@ -1,0 +1,21 @@
+SET a to 10
+
+WHILE a <= 30
+	IF a % 2 == 0 AND a % 3 == 0 THEN
+		DISPLAY a 
+	ENDIF
+	ADD 1 TO a 
+ENDWHILE
+
+
+SET a to 10
+
+WHILE a <= 30
+
+	IF a % 2 == 0 OR a % 3 == 0 THEN 
+		DISPLAY a 
+	ENDIF 
+
+	ADD 1 TO a 
+
+ENDWHILE

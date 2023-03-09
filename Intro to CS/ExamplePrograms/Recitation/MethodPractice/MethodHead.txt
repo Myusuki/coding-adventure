@@ -1,0 +1,9 @@
+public static boolean IsAdultht( String name, int age )
+{
+	return IS ADULT;
+}
+
+public static String PrintFullName( String first, String last )
+{
+		return last + ", " + first;
+}

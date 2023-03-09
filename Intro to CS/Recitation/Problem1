@@ -1,0 +1,12 @@
+READ age
+READ US_citizenship
+
+IF age < 18 OR !US_citizenship THEN
+	DISPLAY "ERROR: Unable to vote!"
+ENDIF
+
+DISPLAY "You can vote!"
+
+HALT
+
+recitation1

@@ -1,0 +1,23 @@
+SET num TO 1
+
+WHILE num <= 100
+	IF num % 3 IS 0 THEN
+		DISPLAY Fizz
+	ELSE
+		IF num % 3 != 0 THEN
+			DISPLAY "Number is not divisible by 3"
+		ENDIF 
+	ENDIF
+
+	IF num % 5 IS 0 THEN 
+		DISPLAY Buzz
+	ENDIF
+
+	IF num % 15 IS 0 THEN 
+		DISPLAY FizzBuzz
+	ELSE	
+		IF num % 15 != 0 THEN 
+			DISPLAY "Number is not divisible by 15"
+		ENDIF
+	ENDIF 
+ENDWHILE
