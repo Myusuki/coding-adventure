@@ -1,0 +1,15 @@
+/home/myu/GitDownloads/coding-adventure/cs/HelloWorld/bin/Debug/net7.0/HelloWorld
+/home/myu/GitDownloads/coding-adventure/cs/HelloWorld/bin/Debug/net7.0/HelloWorld.deps.json
+/home/myu/GitDownloads/coding-adventure/cs/HelloWorld/bin/Debug/net7.0/HelloWorld.runtimeconfig.json
+/home/myu/GitDownloads/coding-adventure/cs/HelloWorld/bin/Debug/net7.0/HelloWorld.dll
+/home/myu/GitDownloads/coding-adventure/cs/HelloWorld/bin/Debug/net7.0/HelloWorld.pdb
+/home/myu/GitDownloads/coding-adventure/cs/HelloWorld/obj/Debug/net7.0/HelloWorld.csproj.AssemblyReference.cache
+/home/myu/GitDownloads/coding-adventure/cs/HelloWorld/obj/Debug/net7.0/HelloWorld.GeneratedMSBuildEditorConfig.editorconfig
+/home/myu/GitDownloads/coding-adventure/cs/HelloWorld/obj/Debug/net7.0/HelloWorld.AssemblyInfoInputs.cache
+/home/myu/GitDownloads/coding-adventure/cs/HelloWorld/obj/Debug/net7.0/HelloWorld.AssemblyInfo.cs
+/home/myu/GitDownloads/coding-adventure/cs/HelloWorld/obj/Debug/net7.0/HelloWorld.csproj.CoreCompileInputs.cache
+/home/myu/GitDownloads/coding-adventure/cs/HelloWorld/obj/Debug/net7.0/HelloWorld.dll
+/home/myu/GitDownloads/coding-adventure/cs/HelloWorld/obj/Debug/net7.0/refint/HelloWorld.dll
+/home/myu/GitDownloads/coding-adventure/cs/HelloWorld/obj/Debug/net7.0/HelloWorld.pdb
+/home/myu/GitDownloads/coding-adventure/cs/HelloWorld/obj/Debug/net7.0/HelloWorld.genruntimeconfig.cache
+/home/myu/GitDownloads/coding-adventure/cs/HelloWorld/obj/Debug/net7.0/ref/HelloWorld.dll

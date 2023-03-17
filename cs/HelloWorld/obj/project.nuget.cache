@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "vAo26OfChl7xbOYSzggp9rS90sOfRXClGGZnW+YnJOysQusvTUmjj66VlyjRcHrUYBBvWL6g2t3ylGzHxylXgQ==",
+  "success": true,
+  "projectFilePath": "/home/myu/GitDownloads/coding-adventure/cs/HelloWorld/HelloWorld.csproj",
+  "expectedPackageFiles": [
+    "/home/myu/.nuget/packages/microsoft.aspnetcore.app.ref/7.0.3/microsoft.aspnetcore.app.ref.7.0.3.nupkg.sha512"
+  ],
+  "logs": []
+}
