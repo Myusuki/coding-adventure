@@ -92,9 +92,6 @@ public class WeatherGenerator {
 																	 double longitude, double latitude, 
 																	 double[][] drywet, double[][] wetwet){
 		// COMPLETE THIS METHOD
-		drywetProbability = new double[12];
-		wetwetProbability = new double[12];
-		
 		for( int i = 0; i < drywet.length; i++ )
 		{
 			if( drywet[ i ][ 0] == longitude && drywet[ i ][ 1 ] == latitude )
@@ -218,10 +215,21 @@ public class WeatherGenerator {
 	 *      this method call should returns an size 31 array with 1s and 2s, 
 	 *      the return result will be different for each run since it is randomly generated. 
 	 */
-	/*public static int[] oneMonthForecast(int numberOfLocations, int month, double longitude, double latitude ){
+	public static int[] oneMonthForecast(int numberOfLocations, int month, double longitude, double latitude ){
 			
-			// COMPLETE THIS METHOD
-	}*/
+		// COMPLETE THIS METHOD
+		double[][] drywetArray = new double[ numberOfLocations ][ 14 ];
+		double[][] wetwetArray = new double[ numberOfLocations ][ 14 ];
+		populateArrays(drywetArray, wetwetArray);
+
+		double[] drywetProbabilityArray = new double[ 12 ];
+		double[] wetwetProbabilityArray = new double[ 12 ];
+		populateLocationProbabilities(drywetProbabilityArray, wetwetProbabilityArray, longitude, latitude, drywetArray, wetwetArray);
+
+		
+		int[] forecastArray = forecastGenerator(drywetProbabilityArray[ month ], wetwetProbabilityArray[ month ], numberOfDaysInMonth[ month ] );
+		return forecastArray;
+	}
 
 	/********
 	 * 
@@ -248,10 +256,17 @@ public class WeatherGenerator {
 	 *      System.out.println(lengthOfLongestSpell(arr, DRY)); //prints out 3
 	 *      System.out.println(lengthOfLongestSpell(arr, WET)); //prints out 1
 	 */ 
-	/*public static int numberOfWetDryDays (int[] forecast, int mode) {
+	public static int numberOfWetDryDays (int[] forecast, int mode) {
 			
-			// COMPLETE THIS METHOD
-	}*/
+		// COMPLETE THIS METHOD
+		int amountOfWetDryDays = 0;
+		for( int i = 0; i < forecast.length; i++ )
+		{
+			if( forecast[ i ] == mode )
+				amountOfWetDryDays++;
+		}	
+		return amountOfWetDryDays;
+	}
 
 	/* 
 	 * Description:
@@ -271,10 +286,23 @@ public class WeatherGenerator {
 	 *      int[] arr = {1,2,2,1,2,1,2,2,1,1,2,1, 2,2,2,2,2,2,2,2,2, 1,2,1,2,1,2,1,2}
 	 *      System.out.println(lengthOfLongestSpell(arr), DRY); //prints out 9
 	 */ 
-	/*public static int lengthOfLongestSpell (int[] forecast, int mode) {
+	public static int lengthOfLongestSpell (int[] forecast, int mode) {
 			
-			// COMPLETE THIS METHOD
-	}*/
+		// COMPLETE THIS METHOD
+		int longestSpell = 0;
+		for( int i = 0; i < forecast.length; i++ )
+		{
+			if( forecast[ i ] == mode )
+			{
+				longestSpell++;
+			}
+			else
+			{
+				longestSpell = 0;
+			}
+		}
+		return longestSpell;
+	}
 
 	/* 
 	 * Description:
@@ -294,10 +322,40 @@ public class WeatherGenerator {
 	 *      int[] arr = {1,2,2,1,2,1,2,2,1,1,2, 1,  2,2,2,2,2,2,2,2,2,  1,2,1,2,1,2,1,2}
 	 *      System.out.println(lengthOfLongestSpell(arr)); //prints out 12
 	 */ 
-	/*public static int bestWeekToTravel(int[] forecast){
+	public static int bestWeekToTravel(int[] forecast){
 			
-			// COMPLETE THIS METHOD
-	}*/
+		// COMPLETE THIS METHOD
+		int bestWeekIndex = 0;
+		int amountOfDryDays = 0; 
+		int[] dryDayCount = new int[ forecast.length-7 ];
+		for( int i = 0; i < forecast.length-7; i++ )
+		{
+			amountOfDryDays = 0;
+			for( int j = i; j < i + 6; j++ )
+			{
+				if( forecast[ j ] == DRY )
+				{
+					amountOfDryDays++;
+				}
+			}
+			dryDayCount[ i ] = amountOfDryDays;
+		}
+		for( int x: dryDayCount )
+		{
+			System.out.print( x + " " );
+		}
+		System.out.println();
+		int max = dryDayCount[ 0 ];
+		for( int i = 0; i < dryDayCount.length; i++ )
+		{
+			if( dryDayCount[ i ] > max )
+			{
+				max = dryDayCount[ i ];
+				bestWeekIndex = i;
+			}
+		} 
+		return bestWeekIndex;
+	}
 
 	/*
 	 * Reads the files containing the transition probabilities for US locations.
@@ -306,22 +364,18 @@ public class WeatherGenerator {
 	 */
 	public static void main (String[] args) {
 
-		int numberOfRows    = 4100; // Total number of locations
+		/* int numberOfRows    = 4100; // Total number of locations
 		int numberOfColumns = 14;   // Total number of 14 columns in file 
 		
 		// File format: longitude, latitude, 12 months of transition probabilities
-		//double longitude = Double.parseDouble(args[0]);
-		//double latitude  = Double.parseDouble(args[1]);
-		//int    month     = Integer.parseInt(args[2]);
+		double longitude = Double.parseDouble(args[0]);
+		double latitude  = Double.parseDouble(args[1]);
+		int    month     = Integer.parseInt(args[2]);
 		
-		double[][] drywet = new double[ numberOfRows ][ numberOfColumns ];
-		double[][] wetwet = new double[ numberOfRows ][ numberOfColumns ];
-		populateArrays(drywet, wetwet);
-		for (double[] array : drywet) {
-				System.out.println(Arrays.toString(array));
-		}
-		// int[] forecast = oneMonthForecast( numberOfRows,  month,  longitude,  latitude );
-		
+		int[] forecast = oneMonthForecast( numberOfRows,  month,  longitude,  latitude ); */
+		int[] arr = {1,2,2,1,2,1,2,2,1,1,2,1,2,2,2,2,2,2,2,2,2,1,2,1,2,1,2,1,2};
+		//System.out.println( arr.length );
+		System.out.println( bestWeekToTravel(arr) ); //prints out 12
 
 		/*int drySpell = lengthOfLongestSpell(forecast, DRY);
 		int wetSpell = lengthOfLongestSpell(forecast, WET);

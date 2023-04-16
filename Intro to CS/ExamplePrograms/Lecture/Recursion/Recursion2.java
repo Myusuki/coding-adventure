@@ -22,12 +22,12 @@ public class Recursion2
 		if( index == 0 )
 			return 0;
 		else
-			return x[ index - 1 ] + sumArrayR(x, index -= 1 );
+			return x[ index - 1 ] + sumArrayR(x, index-- );
 	}
 	public static int minArrayR( int[] x, int index )
 	{
 		if( index == 1 )
 			return x[ 0 ];
-		return Math.min( x[ index - 1 ], minArrayR( x, index - 1 ) );
+		return Math.min( x[ index - 1 ], minArrayR( x, index-- ) );
 	}
 }
