@@ -158,9 +158,9 @@ public class Collage {
 			{
 				for( int collageColumn = 0; collageColumn < collageDimension; collageColumn++ )
 				{
-					for( int tileRow = 0; row < tile.height(); row++ )
+					for( int tileRow = 0; tileRow < tile.height(); tileRow++ )
 					{
-						for( int tileColumn = 0; column < tile.width(); column++ )
+						for( int tileColumn = 0; tileColumn < tile.width(); tileColumn++ )
 						{
 							int targetCol = tileColumn + ( tileDimension * collageColumn );
 							int targetRow = tileRow + ( tileDimension * collageRow );
@@ -185,7 +185,7 @@ public class Collage {
     public void colorizeTile (String component,  int collageCol, int collageRow) {
 
         // WRITE YOUR CODE HERE
-    	color = component.toLowerCase;
+    	String color = component.toLowerCase();
 			switch( color )
 			{
 				case "red":
@@ -248,7 +248,7 @@ public class Collage {
 				Picture tile = new Picture( tileDimension, tileDimension );
 				scale( newTile, tile );
 				
-				for( int tileCol = 0; tileCol < tileDimension; targetCol++ )
+				for( int tileCol = 0; tileCol < tileDimension; tileCol++ )
 				{
 					for( int tileRow = 0; tileRow < tileDimension; tileRow++ )
 					{
@@ -269,6 +269,17 @@ public class Collage {
     public void grayscaleTile (int collageCol, int collageRow) {
 
         // WRITE YOUR CODE HERE
+			for( int tileCol = 0; tileCol < tileDimension; tileCol++ )
+			{
+				for( int tileRow = 0; tileRow < tileDimension; tileRow++ )
+				{
+					int targetCol = tileCol + ( collageCol * tileDimension );
+					int targetRow = tileRow + ( collageRow * tileDimension );
+					Color targetColor = collagePicture.get( targetCol, targetRow );
+					Color newTargetColor = toGray( targetColor );
+					collagePicture.set( targetCol, targetRow, newTargetColor );
+				}
+			}
     }
 
     /**
