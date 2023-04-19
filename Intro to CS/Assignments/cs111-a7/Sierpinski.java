@@ -41,6 +41,7 @@ public class Sierpinski {
 			filledTriangle(x, y, length);
 			sierpinski(n-1, x, y + height( length ), length/ 2);
 			sierpinski( n-1, x - (length/ 2.0), y, length/ 2);
+			sierpinski( n-1, x + (length/ 2.0), y, length/ 2);
 		}
 	}
 
