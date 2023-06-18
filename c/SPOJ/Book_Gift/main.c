@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-int main(	)
+int main()
 {
 	int testCaseNum = 0;
 	scanf( "%d\n", &testCaseNum );
