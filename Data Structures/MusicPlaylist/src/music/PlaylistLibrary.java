@@ -148,7 +148,7 @@ public class PlaylistLibrary {
             songLibrary.add(createPlaylist(filename));
         } else {
             songLibrary.add(playlistIndex, createPlaylist(filename));
-        }        
+        }
     }
 
     /**
@@ -224,18 +224,33 @@ public class PlaylistLibrary {
     public boolean insertSong(int playlistIndex, int position, Song song) {
         // WRITE YOUR CODE HERE
         Playlist targetPlaylist = songLibrary.get(playlistIndex);
-        SongNode headNodeRef = targetPlaylist.getLast().getNext();
-        SongNode lastNodeRef = targetPlaylist.getLast();
+        SongNode lastNodeRef = null;
 		int targetPlaylistsize = targetPlaylist.getSize(); 
-        SongNode targetPositionNode = headNodeRef;
-		SongNode targetPositionPrevNode = lastNodeRef;
         //check if song cannot be added
         if( position <= 0 || position > (targetPlaylist.getSize() + 1) )
         {
             return false;
         }
+
+        // check if the user is inserting in an empty playlist 
+        if( targetPlaylistsize == 0 )
+        {
+            SongNode newSong = new SongNode(song, null);
+            lastNodeRef = newSong;
+            lastNodeRef.setNext(newSong);
+            targetPlaylist.setLast(lastNodeRef);
+            targetPlaylist.setSize(targetPlaylistsize + 1);
+            songLibrary.set(playlistIndex, targetPlaylist);
+            return true;
+        }
+
+        SongNode headNodeRef = targetPlaylist.getLast().getNext();
+        lastNodeRef = targetPlaylist.getLast();
+        SongNode targetPositionNode = headNodeRef;
+		SongNode targetPositionPrevNode = lastNodeRef;
+
         // check if user is inserting song at the end of the playlist 
-        else if( position == (targetPlaylist.getSize() + 1) )
+        if( position == (targetPlaylist.getSize() + 1) )
         {
             SongNode newSong = new SongNode(song, headNodeRef);
             lastNodeRef.setNext(newSong);
@@ -295,10 +310,36 @@ public class PlaylistLibrary {
         Playlist targetPlaylist = songLibrary.get(playlistIndex);
         int songPosition = 1;
         int targetPlaylistsize = targetPlaylist.getSize();
-        SongNode targetSongNode = targetPlaylist.getLast().getNext();
-        SongNode targetPrevSongNode = targetPlaylist.getLast();
+        SongNode targetSongNode = null;
+        SongNode targetPrevSongNode = null;
         SongNode checkSong = targetSongNode;
         boolean songFound = false;
+
+        // check to make sure there are songs in the playlist
+        if( targetPlaylistsize == 0 )
+        {
+            return false;
+        }
+        if( targetPlaylistsize == 1 )
+        {
+            targetSongNode = targetPlaylist.getLast();
+            checkSong = targetSongNode;
+            if( checkSong.getSong().equals(song) )
+            {
+                targetSongNode.setNext(null);
+                targetPlaylist.setLast(null);
+                targetPlaylist.setSize(targetPlaylistsize - 1);
+                songLibrary.set(playlistIndex, targetPlaylist);
+                return true;
+            }
+            else
+                return false;
+        }
+
+        targetSongNode = targetPlaylist.getLast().getNext();
+        targetPrevSongNode = targetPlaylist.getLast();
+        checkSong = targetSongNode;
+        songFound = false;
 
         while( songFound != true )
         {
@@ -375,6 +416,31 @@ public class PlaylistLibrary {
      */
     public void reversePlaylist(int playlistIndex) {
         // WRITE YOUR CODE HERE
+        Playlist targetPlaylist = songLibrary.get(playlistIndex);
+        SongNode last = targetPlaylist.getLast();
+        SongNode headNode = last.getNext();
+
+		if( targetPlaylist.getSize() == 0 )
+		{
+			return;
+		}
+
+        SongNode left = last;
+        SongNode head = last.getNext();
+        SongNode right = null;
+
+        int songPosition = 0;
+
+        while( right != headNode )
+        {
+            songPosition++;
+            right = head.getNext();
+            head.setNext(left);
+            left = head;
+            head = right;
+        }
+        targetPlaylist.setLast(head);
+        songLibrary.set(playlistIndex, targetPlaylist);
     }
 
     /**
@@ -398,6 +464,124 @@ public class PlaylistLibrary {
     public void mergePlaylists(int playlistIndex1, int playlistIndex2) {
       
         // WRITE YOUR CODE HERE
+		Playlist playlist1 = songLibrary.get(playlistIndex1);
+		Playlist playlist2 = songLibrary.get(playlistIndex2);
+        Playlist resultPlaylist = new Playlist();
+        int playlist1Index = playlistIndex1;
+        int playlist2Index = playlistIndex2;
+		if( playlistIndex1 > playlistIndex2 )
+		{
+			playlist1 = songLibrary.get(playlistIndex2);
+            playlist1Index = playlistIndex2;
+            playlist2 = songLibrary.get(playlistIndex1);
+            playlist2Index = playlistIndex1;
+		}
+
+        int playlist1Size = playlist1.getSize();
+        int playlist2Size = playlist2.getSize();
+        
+        if( playlist1Size == 0 && playlist2Size == 0 )
+        {
+            songLibrary.remove(playlist2Index);
+            return;
+        }
+        if( playlist2Size == 0 )
+        {
+            songLibrary.remove(playlist2Index);
+            return;
+        }
+        else if( playlist1Size == 0 )
+        {
+            songLibrary.set(playlist1Index, playlist2);
+            songLibrary.remove(playlist2Index);
+            return;
+        }
+
+        SongNode resultPlaylistNode = new SongNode();
+        SongNode resultPlaylistLastNode = new SongNode();
+
+        while( playlist1Size > 0 && playlist2Size > 0 )
+        {
+            SongNode playlist1Head = playlist1.getLast().getNext();
+            SongNode playlist2Head = playlist2.getLast().getNext();
+            if( playlist1Head.getSong().getPopularity() >= playlist2Head.getSong().getPopularity() )
+            {
+                if( resultPlaylist.getSize() == 0 )
+                {
+                    removeSong(playlist1Index, playlist1Head.getSong() );
+                    playlist1Size--;
+                    resultPlaylistLastNode = playlist1Head;
+                    resultPlaylistLastNode.setNext(resultPlaylistLastNode);
+                    resultPlaylist.setLast(resultPlaylistLastNode);
+                    resultPlaylist.setSize(resultPlaylist.getSize() + 1);
+                }
+                else
+                {
+                    removeSong(playlist1Index, playlist1Head.getSong() );
+                    playlist1Size--;
+                    playlist1Head.setNext(resultPlaylistLastNode.getNext() );
+                    resultPlaylistLastNode.setNext(playlist1Head);
+                    resultPlaylistLastNode = playlist1Head;
+                    resultPlaylist.setLast(resultPlaylistLastNode);
+                    resultPlaylist.setSize(resultPlaylist.getSize() + 1);
+                }
+            }
+            else if( playlist1Head.getSong().getPopularity() < playlist2Head.getSong().getPopularity() )
+            {
+                if( resultPlaylist.getSize() == 0 )
+                {
+                    removeSong(playlist2Index, playlist2Head.getSong() );
+                    playlist2Size--;
+                    resultPlaylistLastNode = playlist2Head;
+                    resultPlaylistLastNode.setNext(resultPlaylistLastNode);
+                    resultPlaylist.setLast(resultPlaylistLastNode);
+                    resultPlaylist.setSize(resultPlaylist.getSize() + 1);
+                }
+                else
+                {
+                    removeSong(playlist2Index, playlist2Head.getSong() );
+                    playlist2Size--;
+                    playlist2Head.setNext(resultPlaylistLastNode.getNext() );
+                    resultPlaylistLastNode.setNext(playlist2Head);
+                    resultPlaylistLastNode = playlist2Head;
+                    resultPlaylist.setLast(resultPlaylistLastNode);
+                    resultPlaylist.setSize(resultPlaylist.getSize() + 1);
+                }
+            }
+        }
+            
+        if( playlist1Size == 0 && playlist2Size != 0 )
+        {
+            while( playlist2Size > 0 )
+            {
+                SongNode playlist2Head = playlist2.getLast().getNext();
+                removeSong(playlist2Index, playlist2Head.getSong() );
+                playlist2Size--;
+                playlist2Head.setNext(resultPlaylistLastNode.getNext() );
+                resultPlaylistLastNode.setNext(playlist2Head);
+                resultPlaylistLastNode = resultPlaylistNode;
+                resultPlaylist.setLast(resultPlaylistLastNode);
+                resultPlaylist.setSize(resultPlaylist.getSize() + 1);
+            }
+        }
+        else if( playlist1Size != 0 && playlist2Size == 0 )
+        {
+            while( playlist1Size > 0 )
+            {
+                System.out.println( "Hello" );
+                SongNode playlist1Head = playlist1.getLast().getNext();
+                removeSong(playlist1Index, playlist1Head.getSong() );
+                playlist1Size--;
+                playlist1Head.setNext(resultPlaylistLastNode.getNext() );
+                resultPlaylistLastNode.setNext(playlist1Head);
+                resultPlaylistLastNode = playlist1Head;
+                resultPlaylist.setLast(resultPlaylistLastNode);
+                resultPlaylist.setSize(resultPlaylist.getSize() + 1);
+            }
+        }
+
+        songLibrary.set(playlist1Index, resultPlaylist);
+        removePlaylist(playlist2Index);
     }
 
     /**
@@ -419,6 +603,41 @@ public class PlaylistLibrary {
      */
     public void shufflePlaylist(int playlistIndex) {
         // WRITE YOUR CODE HERE
+        Playlist targetPlaylist = songLibrary.get(playlistIndex);
+        Playlist shuffledPlaylist = new Playlist();
+        int targetPlaylistSize = targetPlaylist.getSize();
+
+        SongNode targetSong = targetPlaylist.getLast();
+        while( targetPlaylistSize > 0 )
+        {
+            // int targetSongPosition = StdRandom.uniformInt(1, (targetPlaylistSize + 1) );
+            int targetSongPosition = StdRandom.uniformInt(1, (targetPlaylistSize + 1) );
+            for( int i = 0; i < targetSongPosition; i++ )
+            {
+                targetSong = targetSong.getNext();
+            }
+
+            removeSong(playlistIndex, targetSong.getSong() );
+            
+            if( shuffledPlaylist.getSize() == 0 )
+            {
+                shuffledPlaylist.setLast(targetSong);
+                shuffledPlaylist.getLast().setNext(targetSong);
+                shuffledPlaylist.setSize(shuffledPlaylist.getSize() + 1);
+                targetPlaylistSize--;
+            }
+            else
+            {
+                targetSong.setNext(shuffledPlaylist.getLast().getNext() );
+                shuffledPlaylist.getLast().setNext(targetSong);
+                shuffledPlaylist.setLast(targetSong);
+                shuffledPlaylist.setSize(shuffledPlaylist.getSize() + 1);
+                targetPlaylistSize--;
+            }
+            targetSong = targetPlaylist.getLast();
+        }
+
+        songLibrary.set(playlistIndex, shuffledPlaylist);
 
     }
 

@@ -33,16 +33,5 @@ int main()
 			printf( "Balance remaining after %d rd payment: %f\n", timesPaid, payment);
 		loanAmount = loanAmount * (1 + monthlyInterest) - monthlyPayment;
 	}
-	// float firstPayment = loanAmount * (1 + monthlyInterest) - monthlyPayment;
-	// printf( "Balance remaining after first payment: %.2f\n", firstPayment );
-	// loanAmount = loanAmount * (1 + monthlyInterest) - monthlyPayment;
-
-	// float secondPayment = loanAmount * (1 + monthlyInterest) - monthlyPayment;
-	// printf( "Balance remaining after second payment: %.2f\n", secondPayment );
-	// loanAmount = loanAmount * (1 + monthlyInterest) - monthlyPayment;
-
-	// float thirdPayment = loanAmount * (1 + monthlyInterest) - monthlyPayment;
-	// printf( "Balance remaining after third payment: %.2f\n", thirdPayment );
-
 	return 0;
 }
