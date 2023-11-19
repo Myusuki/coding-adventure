@@ -1,0 +1,32 @@
+#include <stdio.h>
+
+int main()
+{
+	int denom = 1;
+	float e = 1.0f, epsilon, term = 1.0f;
+
+	printf( "Enter epsilon: " );
+	scanf( "%f", &epsilon );
+
+	for( int i = 1; term > epsilon; i++ )
+	{
+		term = (1.0f / (denom *= i) );
+		e += term;
+	}
+
+	printf( "Approximation of e: %f\n", e );
+
+	// int i, denom;
+ //    float e, epsilon, term;
+	//
+ //    printf("Enter epsilon: ");
+ //    scanf("%f", &epsilon);
+	//
+ //    for (i = 1, denom = 1, e = 1.0f, term = 1.0f; term > epsilon; i++) {
+ //        term = (1.0f / (denom *= i));
+ //        e += term;
+ //    }
+ //    printf("Approximation of e: %f\n", e);
+
+	return 0;
+}
