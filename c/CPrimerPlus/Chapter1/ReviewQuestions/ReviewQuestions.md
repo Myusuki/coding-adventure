@@ -7,7 +7,7 @@
 **Answer**: The source code file is a file that contains human readable code that the programmer wrote. The object code file is the source code file translated into machine code, however doesn't contain startup code or code needed from libraries. An executable file is an object code file with the startup code and code from libraries. 
 
 ## Question 3
-- What are the seven major steps in programming?
+- What are the seven major steps in programming?  
 **Answer**: 
     - Step 1: Define the objectives of the program.
     - Step 2: Design the program.

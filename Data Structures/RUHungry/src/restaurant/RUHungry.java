@@ -568,7 +568,6 @@ public class RUHungry {
      */
 
     public void order ( String dishName, int quantity ){
-
         // WRITE YOUR CODE HERE
         if( checkDishAvailability(dishName, quantity) )
         {
@@ -654,8 +653,18 @@ public class RUHungry {
     public double profit () {
 
         // WRITE YOUR CODE HERE
-        
-        return 0.0; // update the return value
+        TransactionNode ptr = transactionVar;
+        double total = 0.0;
+        if( ptr == null )
+        {
+            return total;
+        }
+        while( ptr != null )
+        {
+            total += ptr.getData().getProfit();
+            ptr = ptr.getNext();
+        }
+        return total; // update the return value
     }
 
     /**
@@ -673,6 +682,26 @@ public class RUHungry {
     public void donation ( String ingredientName, int quantity ){
 
         // WRITE YOUR CODE HERE
+        double totalProfit = profit();
+        if( totalProfit < 50.0 )
+        {
+            TransactionData newTransaction = new TransactionData("donation", ingredientName, quantity, 0.0, false);
+            addTransactionNode(newTransaction);
+        }
+        else
+        {
+            if( findStockNode(ingredientName).getIngredient().getStockLevel() - quantity < 0 )
+            {
+                TransactionData newTransaction = new TransactionData("donation", ingredientName, quantity, 0.0, false);
+                addTransactionNode(newTransaction);
+            }
+            else
+            {
+                TransactionData newTransaction = new TransactionData("donation", ingredientName, quantity, 0.0, true);
+                addTransactionNode(newTransaction);
+                updateStock(ingredientName, findStockNode(ingredientName).getIngredient().getID(), quantity * -1);
+            }
+        }
     }
 
     /**
@@ -691,6 +720,19 @@ public class RUHungry {
     public void restock ( String ingredientName, int quantity ){
 
         // WRITE YOUR CODE HERE
+        double totalProfit = profit();
+        boolean restockable = ( findStockNode(ingredientName).getIngredient().getCost() * quantity ) <= totalProfit;
+        if( restockable )
+        {
+            TransactionData newTransactionData = new TransactionData("restock", ingredientName, quantity, findStockNode(ingredientName).getIngredient().getCost() * quantity * -1.0, true);
+            addTransactionNode(newTransactionData);
+            updateStock(ingredientName, findStockNode(ingredientName).getIngredient().getID(), quantity);
+        }
+        else
+        {
+            TransactionData newTransactionData = new TransactionData("restock", ingredientName, quantity, 0.00, false);
+            addTransactionNode(newTransactionData);
+        }
     }
 
    /*
