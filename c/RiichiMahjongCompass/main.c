@@ -17,7 +17,7 @@ bool NameCheck( char name[], char playerArr );
 int main(void)
 {
 	// Players 
-	struct player player1, player2, player3, player4;
+	struct player players[4];
 
 	int maxNameLength = 27;
 
@@ -33,26 +33,26 @@ int main(void)
 
 	// Ask for player names if no name entered then just use Player 1, 2, etc
 	printf( "Name for player 1 (press Enter for default name): " );
-	fgets(player1.name, maxNameLength, stdin);
-	NameProcessor(player1.name, 1);
+	fgets(players[0].name, maxNameLength, stdin);
+	NameProcessor(players[0].name, 1);
 	printf( "Name for player 2 (press Enter for default name): " );
-	fgets(player2.name, maxNameLength, stdin);
-	NameProcessor(player2.name, 2);
+	fgets(players[1].name, maxNameLength, stdin);
+	NameProcessor(players[1].name, 2);
 	printf( "Name for player 3 (press Enter for default name): " );
-	fgets(player3.name, maxNameLength, stdin);
-	NameProcessor(player3.name, 3);
+	fgets(players[2].name, maxNameLength, stdin);
+	NameProcessor(players[2].name, 3);
 	printf( "Name for player 4 (press Enter for default name): " );
-	fgets(player4.name, maxNameLength, stdin);
-	NameProcessor(player4.name, 4);
+	fgets(players[3].name, maxNameLength, stdin);
+	NameProcessor(players[3].name, 4);
 
 	// Assign starting score to players 
-	player1.points = player2.points = player3.points = player4.points = startingScore;
+	players[0].points = players[1].points = players[2].points = players[3].points = startingScore;
 	
 	// display name and score
-	printf( "%s: %ld\n", player1.name, player1.points );
-	printf( "%s: %ld\n", player2.name, player2.points);
-	printf( "%s: %ld\n", player3.name, player3.points );
-	printf( "%s: %ld\n", player4.name, player4.points );
+	printf( "%s: %ld\n", players[0].name, players[0].points );
+	printf( "%s: %ld\n", players[1].name, players[1].points);
+	printf( "%s: %ld\n", players[2].name, players[2].points );
+	printf( "%s: %ld\n", players[3].name, players[3].points );
 
 	return 0;
 }
