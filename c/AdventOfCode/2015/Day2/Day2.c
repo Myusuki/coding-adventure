@@ -1,166 +1,78 @@
 #include <stdio.h>
 
+
+// get the smallest num out 3 numbers
+int MinOf3( int num1, int num2, int num3 );
+// checks for the smallest side and returns the value
+int MinSide( int width, int length, int height );
+
 int main(void)
 {
 	FILE *fptr;
 
-	fptr = fopen("order1.txt", "r");
+	fptr = fopen("order.txt", "r");
 
-	char string[12];
-	long int total = 0;
+	int totalArea = 0;
+	int totalLength = 0;
 
-	// fgets(string, 12, fptr);
-	// int i = 0;
-	// int length = 0;
-	// int width = 0;
-	// int height = 0;
-	//
-	// while( string[i] != 'x' )
-	// {
-	// 	if( string[i + 1] == 'x' )
-	// 	{
-	// 		int num = (int)string[i];
-	// 		num -= 48;
-	// 		length += num;
-	// 	}
-	// 	else
-	// 	{
-	// 		length *= 10;
-	// 		int num = (int)string[i];
-	// 		num -= 48;
-	// 		length += num;
-	// 		length *= 10;
-	// 	}
-	// 	printf( "Length: %d\n", length );
-	// 	i++;
-	// }
-	// i++;
-	// while( string[i] != 'x' )
-	// {
-	// 	if( string[i + 1] == 'x' )
-	// 	{
-	// 		int num = (int)string[i];
-	// 		num -= 48;
-	// 		width += num;
-	// 	}
-	// 	else
-	// 	{
-	// 		width *= 10;
-	// 		int num = (int)string[i];
-	// 		num -= 48;
-	// 		width += num;
-	// 		width *= 10;
-	// 	}
-	// 	printf( "Width: %d\n", width );
-	// 	i++;
-	// }
-	// i++;
-	// while( string[i] != '\n' )
-	// {
-	// 	if( string[i + 1] == '\n' )
-	// 	{
-	// 		int num = (int)string[i];
-	// 		num -= 48;
-	// 		height += num;
-	// 	}
-	// 	else
-	// 	{
-	// 		height *= 10;
-	// 		int num = (int)string[i];
-	// 		num -= 48;
-	// 		height += num;
-	// 		height *= 10;
-	// 	}
-	// 	printf( "Height: %d\n", height );
-	// 	i++;
-	// }
-	// total += (2 * length * width) + (2 * width * height) + (2 * height * length);
-	// printf( "Total: %d\n", total );
-
-	while( fgets(string, 12, fptr))
+	while( !feof(fptr) )
 	{
-		int i = 0;
-		int length = 0;
-		int width = 0;
-		int height = 0;
-		if( string[i] == '\0' )
-			break;
-		while( string[i] != 'x' )
-		{
-			if( string[i + 1] == 'x' )
-			{
-				int num = (int)string[i];
-				num -= 48;
-				length += num;
-			}
-			else
-			{
-				length *= 10;
-				int num = (int)string[i];
-				num -= 48;
-				length += num;
-				length *= 10;
-			}
-			printf( "Length: %d\n", length );
-			i++;
-		}
-		i++;
-		while( string[i] != 'x' )
-		{
-			if( string[i + 1] == 'x' )
-			{
-				int num = (int)string[i];
-				num -= 48;
-				width += num;
-			}
-			else
-			{
-				width *= 10;
-				int num = (int)string[i];
-				num -= 48;
-				width += num;
-				width *= 10;
-			}
-			printf( "Width: %d\n", width );
-			i++;
-		}
-		i++;
-		while( string[i] != '\n' )
-		{
-			if( string[i + 1] == '\n' )
-			{
-				int num = (int)string[i];
-				num -= 48;
-				height += num;
-			}
-			else
-			{
-				height *= 10;
-				int num = (int)string[i];
-				num -= 48;
-				height += num;
-				height *= 10;
-			}
-			printf( "Height: %d\n", height );
-			i++;
-		}
-		total += (2 * length * width) + (2 * width * height) + (2 * height * length);
-		int side1 = 2 * length * width;
-		int side2 = 2 * width * height;
-		int side3 = 2 * height * length;
-		int min = side1;
+		int width = 0, length = 0, height = 0;
 
-		if( side2 < side1 )
-			min = side2;
-		else if( side3 < side1 )
-			min = side3;
-		
-		total += min;
-		printf( "Min: %d\n", min );
-		printf( "Total: %ld\n", total );
+		fscanf(fptr, "%dx%dx%d", &width, &length, &height);
+
+		// wrapping paper calculations
+		int smallestSide = MinSide(width, length, height);
+		int surfaceArea = (2 * width * length) + (2 * length * height) + (2 * width * height);
+		totalArea += surfaceArea + smallestSide;
+
+		// ribbon calculations 
+		int perimeterSide1 = MinOf3(width, length, height);
+		int perimeterSide2 = 0;
+		// accomadations for potential division by 0
+		if( (width == 0 && length == 0) || (width == 0 && height == 0) || (length == 0 && height == 0) )
+			perimeterSide2 = 0;
+		else
+			perimeterSide2 = smallestSide / perimeterSide1;
+		int shortestWrappingLength = (2 * perimeterSide1) + (2 * perimeterSide2);
+		int bowLength = width * length * height;
+		totalLength += shortestWrappingLength + bowLength;
 	}
-	printf( "Total: %ld\n", total );
+	fclose(fptr);
+
+	printf( "Total wrapping paper length: %d\n", totalArea );
+	printf( "Total ribbon length: %d\n", totalLength );
+
 	return 0;
 }
 
+// get the smallest num out 3 numbers
+int MinOf3( int num1, int num2, int num3 )
+{
+	int min = num1;
 
+	if( num2 < min )
+		min = num2;
+	if( num3 < min )
+		min = num3;
+
+	return min;
+}
+
+// checks for the smallest side and returns the value
+int MinSide( int width, int length, int height )
+{
+	int side1 = 0, side2 = 0, side3 = 0;
+	side1 = width * length;
+	side2 = length * height;
+	side3 = width * height;
+	
+	int min = side1;
+	
+	if( side2 < min )
+		min = side2;
+	if( side3 < min )
+		min = side3;
+
+	return min;
+}

@@ -8,11 +8,16 @@ struct player
 	long int points;
 };
 
+
+// players enter their names and leads to processing 
+void EnterName( struct player playerArr[], int maxNameLength, int numOfPlayers );
+
 // processes name of players
 void NameProcessor( char name[], int playerNum );
 
 // checks name of players against each other to prevent duplicates 
-bool NameCheck( char name[], char playerArr );
+bool NameCheck( char name[], struct player playerArr[], int namesAvailable );
+
 
 int main(void)
 {
@@ -32,18 +37,7 @@ int main(void)
 	getchar();
 
 	// Ask for player names if no name entered then just use Player 1, 2, etc
-	printf( "Name for player 1 (press Enter for default name): " );
-	fgets(players[0].name, maxNameLength, stdin);
-	NameProcessor(players[0].name, 1);
-	printf( "Name for player 2 (press Enter for default name): " );
-	fgets(players[1].name, maxNameLength, stdin);
-	NameProcessor(players[1].name, 2);
-	printf( "Name for player 3 (press Enter for default name): " );
-	fgets(players[2].name, maxNameLength, stdin);
-	NameProcessor(players[2].name, 3);
-	printf( "Name for player 4 (press Enter for default name): " );
-	fgets(players[3].name, maxNameLength, stdin);
-	NameProcessor(players[3].name, 4);
+	EnterName(players, maxNameLength, 4);
 
 	// Assign starting score to players 
 	players[0].points = players[1].points = players[2].points = players[3].points = startingScore;
@@ -54,7 +48,37 @@ int main(void)
 	printf( "%s: %ld\n", players[2].name, players[2].points );
 	printf( "%s: %ld\n", players[3].name, players[3].points );
 
+
 	return 0;
+}
+
+void EnterName( struct player playerArr[], int maxNameLength, int numOfPlayers )
+{
+	for( int i = 0; i < numOfPlayers; i++ )
+	{
+		printf( "Name for player %d (press Enter for default name): ", (i + 1) );
+		if( i == 0 )
+		{
+			fgets(playerArr[0].name, maxNameLength, stdin);
+			NameProcessor(playerArr[0].name, (i + 1) );
+		}
+		else
+		{
+			bool namingConflict = false;
+
+			do
+			{
+				fgets(playerArr[i].name, maxNameLength, stdin);
+				NameProcessor(playerArr[i].name, (i + 1) );
+				namingConflict = NameCheck(playerArr[i].name, playerArr, i);
+				if( namingConflict == true )
+				{
+					printf( "Sorry you're name is already taken by another player. Please choose a different name: " );
+					continue;
+				}
+			} while(  NameCheck(playerArr[i].name, playerArr, i) != false );
+		} 
+	}
 }
 
 void NameProcessor(char name[], int playerNum )
@@ -81,4 +105,15 @@ void NameProcessor(char name[], int playerNum )
 	// Change newline byte at end of string to null byte
 	if( name[strlen(name) - 1] == '\n' )
 		name[strlen(name) - 1] = '\0';
+}
+
+bool NameCheck( char name[], struct player playerArr[], int namesAvailable)
+{
+	bool nameConflict = false;
+	for( int i = 0; i < namesAvailable; i++ )
+	{
+		if( strcmp(name, playerArr[i].name) == 0 )
+			nameConflict = true;
+	}
+	return nameConflict;
 }
