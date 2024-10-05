@@ -3,33 +3,23 @@
 #include <SDL2/SDL_surface.h>
 #include <SDL2/SDL_video.h>
 #include <stdio.h>
-#include <string/string.h>
+#include <string.h>
 #include <stdbool.h>
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
+#include <time.h>
 
-// modular functions 
+// modular functions
 bool Init();
 SDL_Surface* LoadSurface( char *path );
 bool LoadMedia();
-void Quit();
-
-// enum
-enum KeyPressedSurfaces
-{
-  KEYPRESS_SURFACE_DEFAULT,
-  KEYPRESS_SURFACE_UP,
-  KEYPRESS_SURFACE_DOWN,
-  KEYPRESS_SURFACE_LEFT,
-  KEYPRESS_SURFACE_RIGHT,
-  KEYPRESS_SURFACE_TOTAL
-};
+void Close();
 
 // global variables
 SDL_Window *globalWindow = NULL;
 SDL_Surface *globalSurface = NULL;
-SDL_Surface *keyPressedSurfaces[KEYPRESS_SURFACE_TOTAL];
-SDL_Surface *currentSurface = NULL;
+// currently displayed png surface
+SDL_Surface *globalPNGSurface = NULL;
 const int screenWidth = 640;
 const int screenHeight = 480;
 
@@ -37,49 +27,29 @@ int main( int argc, char *argv[] )
 {
   if( !Init() )
     printf( "Failed to initialize!\n" );
-  else
+  else 
   {
     if( !LoadMedia() )
       printf( "Failed to load media!\n" );
     else
     {
       bool quit = false;
-      SDL_Event event;
-      currentSurface = keyPressedSurfaces[KEYPRESS_SURFACE_DEFAULT];
+      SDL_Event e;
 
       while( !quit )
       {
-        while( SDL_PollEvent(&event) )
+        while( SDL_PollEvent(&e) != 0 )
         {
-          if( event.type == SDL_QUIT )
+          if( e.type == SDL_QUIT )
             quit = true;
-          else if( event.type == SDL_KEYDOWN )
-          {
-            switch( event.key.keysym.sym )
-            {
-              case SDLK_UP:
-                currentSurface = keyPressedSurfaces[KEYPRESS_SURFACE_UP];
-                break;
-              case SDLK_DOWN:
-                currentSurface = keyPressedSurfaces[KEYPRESS_SURFACE_DOWN];
-                break;
-              case SDLK_LEFT:
-                currentSurface = keyPressedSurfaces[KEYPRESS_SURFACE_LEFT];
-                break;
-              case SDLK_RIGHT:
-                currentSurface = keyPressedSurfaces[KEYPRESS_SURFACE_RIGHT];
-                break;
-              default:
-                currentSurface = keyPressedSurfaces[KEYPRESS_SURFACE_DEFAULT];
-                break;
-            }
-          }
         }
+        SDL_BlitSurface( globalPNGSurface, NULL, globalSurface, NULL );
+        SDL_UpdateWindowSurface(globalWindow);
       }
     }
   }
 
-  Quit();
+  Close();
 
   return 0;
 }
@@ -87,9 +57,10 @@ int main( int argc, char *argv[] )
 bool Init()
 {
   bool success = true;
+
   if( SDL_Init(SDL_INIT_VIDEO) < 0 )
   {
-    printf( "Unable to initialize SDL! SDL Error: %s\n", SDL_GetError() );
+    printf( "SDL could not be initialize! SDL Error: %s\n", SDL_GetError() );
     success = false;
   }
   else
@@ -97,26 +68,20 @@ bool Init()
     globalWindow = SDL_CreateWindow("SDL Tutorial", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, screenWidth, screenHeight, SDL_WINDOW_SHOWN);
     if( globalWindow == NULL )
     {
-      printf( "Unable to create window! SDL Error: %s\n", SDL_GetError() );
+      printf( "Window could not be created! SDL Error: %s\n", SDL_GetError() );
       success = false;
     }
     else
     {
-      int imgFlag = IMG_INIT_PNG;
-      if( !(IMG_Init(imgFlag) & imgFlag) )
+      // init png loading
+      int imgFlags = IMG_INIT_PNG;
+      if( !(IMG_Init(imgFlags) & imgFlags) )
       {
-        printf( "Unable to initialize SDL_Image! SDL_Image Error: %s\n", IMG_GetError() );
+        printf( "SDL_Image could not initialize! SDL_Image Error: %s\n", IMG_GetError() );
         success = false;
       }
       else
-      {
         globalSurface = SDL_GetWindowSurface(globalWindow);
-        if( globalSurface == NULL )
-        {
-          printf( "Unable to get window surface! SDL Error: %s\n", SDL_GetError() );
-          success = false;
-        }
-      }
     }
   }
 
@@ -125,73 +90,44 @@ bool Init()
 
 SDL_Surface* LoadSurface( char *path )
 {
-  // SDL_Surface *optimizedSurface = NULL;
+  SDL_Surface *optimizedSurface = NULL;
+
+  // load image
   SDL_Surface *loadedSurface = IMG_Load(path);
   if( loadedSurface == NULL )
-    printf( "Unable to load %s! SDL_Image Error:%s\n", path, IMG_GetError() );
-  // else
-  // {
-  //   optimizedSurface =  SDL_ConvertSurface(loadedSurface, globalSurface -> format, 0);
-  //   if( optimizedSurface == NULL )
-  //     printf( "Unable to optimize %s! SDL_Image Error:%s\n", path, IMG_GetError() );
-  //   SDL_FreeSurface(loadedSurface);
-  // }
+    printf( "%s failed to load! SDL_Image Error: %s\n", path, IMG_GetError() );
+  else
+  {
+    optimizedSurface = SDL_ConvertSurface(loadedSurface, globalSurface -> format, 0);
+    if( optimizedSurface == NULL )
+      printf( "%s failed to optimize! SDL Error: %s\n", path, SDL_GetError() );
 
-  // return optimizedSurface;
-  return loadedSurface;
+    SDL_FreeSurface(loadedSurface);
+  }
+
+  return optimizedSurface;
 }
 
 bool LoadMedia()
 {
   bool success = true;
-  // default image
-  keyPressedSurfaces[KEYPRESS_SURFACE_DEFAULT] = LoadSurface("assets/default.png");
-  if( keyPressedSurfaces[KEYPRESS_SURFACE_DEFAULT] == NULL )
+
+  globalPNGSurface = LoadSurface("assets/default.png");
+  if( globalPNGSurface == NULL )
   {
-    printf( "Failed to load default image!\n" );
-    success = false;
-  }
-  // up image
-  keyPressedSurfaces[KEYPRESS_SURFACE_UP] = LoadSurface("assets/up.png");
-  if( keyPressedSurfaces[KEYPRESS_SURFACE_UP] == NULL )
-  {
-    printf( "Failed to load up image!\n" );
-    success = false;
-  }
-  // down image
-  keyPressedSurfaces[KEYPRESS_SURFACE_DOWN] = LoadSurface("assets/down.png");
-  if( keyPressedSurfaces[KEYPRESS_SURFACE_DOWN] == NULL )
-  {
-    printf( "Failed to load down image!\n" );
-    success = false;
-  }
-  // left image
-  keyPressedSurfaces[KEYPRESS_SURFACE_LEFT] = LoadSurface("assets/left.png");
-  if( keyPressedSurfaces[KEYPRESS_SURFACE_LEFT] == NULL )
-  {
-    printf( "Failed to load left image!\n" );
-    success = false;
-  }
-  // right image
-  keyPressedSurfaces[KEYPRESS_SURFACE_RIGHT] = LoadSurface("assets/right.png");
-  if( keyPressedSurfaces[KEYPRESS_SURFACE_RIGHT] == NULL )
-  {
-    printf( "Failed to load right image!\n" );
+    printf( "Failed to load PNG image!\n" );
     success = false;
   }
 
   return success;
 }
 
-void Quit()
+void Close()
 {
-  for( int surfaces = 0; surfaces < KEYPRESS_SURFACE_TOTAL; surfaces++ )
-  {
-    SDL_FreeSurface(keyPressedSurfaces[surfaces] );
-    keyPressedSurfaces[surfaces] = NULL;
-  }
+  SDL_FreeSurface(globalPNGSurface);
+  globalPNGSurface = NULL;
 
   SDL_DestroyWindow(globalWindow);
-
+  IMG_Quit();
   SDL_Quit();
 }
