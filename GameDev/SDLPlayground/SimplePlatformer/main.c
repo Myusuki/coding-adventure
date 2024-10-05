@@ -1,6 +1,9 @@
 #include <SDL2/SDL_error.h>
 #include <SDL2/SDL_events.h>
+#include <SDL2/SDL_keycode.h>
 #include <SDL2/SDL_render.h>
+#include <SDL2/SDL_stdinc.h>
+#include <SDL2/SDL_timer.h>
 #include <SDL2/SDL_video.h>
 #include <stdio.h>
 #include <stdbool.h>
@@ -36,6 +39,8 @@ int main( int argc, char *argv[] )
 
   bool quit = false;
   SDL_Event event;
+  // timer
+  Uint32 startTimer = 0;
 
   // game loop
   while( !quit )
@@ -45,10 +50,14 @@ int main( int argc, char *argv[] )
     {
       if( event.type == SDL_QUIT )
         quit = true;
+      else if( event.type == SDL_KEYDOWN && event.key.keysym.sym == SDLK_RETURN )
+        startTimer = SDL_GetTicks();
     }
     // draw stuff to screen
     SDL_RenderClear(Game.renderer);
     SDL_SetRenderDrawColor(Game.renderer, 0xff, 0xff, 0xff, 0xff);
+
+    printf( "Milliseconds since start time: %d\n", SDL_GetTicks() - startTimer );
 
     SDL_RenderPresent(Game.renderer);
   }
