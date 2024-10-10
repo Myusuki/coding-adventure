@@ -1,3 +1,5 @@
+// a little something for my 4th anniversary and for my gf
+// will be improved down the line
 #include <raylib.h>
 #include <stdbool.h>
 
