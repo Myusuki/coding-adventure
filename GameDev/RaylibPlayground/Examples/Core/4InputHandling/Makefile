@@ -7,3 +7,9 @@ install:
 
 clean:
 	rm $(EXENAME)
+
+test:
+	cc test.c -o Test -O1 -Wall -std=c99 -Wno-missing-braces $(LIBRARIES)
+
+cleanTest:
+	rm Test
