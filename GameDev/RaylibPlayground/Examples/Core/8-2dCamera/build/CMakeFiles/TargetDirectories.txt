@@ -1,0 +1,3 @@
+/home/myu/GitDownloads/coding-adventure/GameDev/RaylibPlayground/Examples/Core/8-2dCamera/build/CMakeFiles/2DCamera.dir
+/home/myu/GitDownloads/coding-adventure/GameDev/RaylibPlayground/Examples/Core/8-2dCamera/build/CMakeFiles/edit_cache.dir
+/home/myu/GitDownloads/coding-adventure/GameDev/RaylibPlayground/Examples/Core/8-2dCamera/build/CMakeFiles/rebuild_cache.dir
