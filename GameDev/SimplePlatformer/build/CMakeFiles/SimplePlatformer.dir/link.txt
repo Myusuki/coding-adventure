@@ -1,0 +1,1 @@
+/sbin/cc -Wl,--dependency-file,CMakeFiles/SimplePlatformer.dir/link.d CMakeFiles/SimplePlatformer.dir/main.c.o -o SimplePlatformer  -Wl,-rpath,/usr/local/lib /usr/local/lib/libtmx.a /usr/local/lib/libraylib.so /usr/lib/libX11.so /usr/lib/libz.so /usr/lib/libxml2.so
