@@ -1,0 +1,3 @@
+/home/myu/Gitdownloads/coding-adventure/GameDev/RaylibPlayground/Examples/Core/9-2dPlatformer/build/CMakeFiles/2DCameraPlatformer.dir
+/home/myu/Gitdownloads/coding-adventure/GameDev/RaylibPlayground/Examples/Core/9-2dPlatformer/build/CMakeFiles/edit_cache.dir
+/home/myu/Gitdownloads/coding-adventure/GameDev/RaylibPlayground/Examples/Core/9-2dPlatformer/build/CMakeFiles/rebuild_cache.dir

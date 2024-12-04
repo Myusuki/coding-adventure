@@ -1,0 +1,1 @@
+/usr/bin/cc -Wl,--dependency-file,CMakeFiles/2DCameraPlatformer.dir/link.d CMakeFiles/2DCameraPlatformer.dir/main.c.o -o /home/myu/Gitdownloads/coding-adventure/GameDev/RaylibPlayground/Examples/Core/9-2dPlatformer/2DCameraPlatformer  /usr/lib/libraylib.so -lm -lX11 -L/usr/lib -lraylib
