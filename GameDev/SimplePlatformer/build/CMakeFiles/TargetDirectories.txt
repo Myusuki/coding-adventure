@@ -1,3 +1,3 @@
-/home/myu/GitDownloads/coding-adventure/GameDev/SimplePlatformer/build/CMakeFiles/SimplePlatformer.dir
-/home/myu/GitDownloads/coding-adventure/GameDev/SimplePlatformer/build/CMakeFiles/edit_cache.dir
-/home/myu/GitDownloads/coding-adventure/GameDev/SimplePlatformer/build/CMakeFiles/rebuild_cache.dir
+/home/myu/Gitdownloads/coding-adventure/GameDev/SimplePlatformer/build/CMakeFiles/SimplePlatformer.dir
+/home/myu/Gitdownloads/coding-adventure/GameDev/SimplePlatformer/build/CMakeFiles/edit_cache.dir
+/home/myu/Gitdownloads/coding-adventure/GameDev/SimplePlatformer/build/CMakeFiles/rebuild_cache.dir

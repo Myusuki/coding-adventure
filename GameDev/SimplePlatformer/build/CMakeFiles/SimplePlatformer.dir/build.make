@@ -53,10 +53,10 @@ RM = /usr/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/myu/GitDownloads/coding-adventure/GameDev/SimplePlatformer
+CMAKE_SOURCE_DIR = /home/myu/Gitdownloads/coding-adventure/GameDev/SimplePlatformer
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/myu/GitDownloads/coding-adventure/GameDev/SimplePlatformer/build
+CMAKE_BINARY_DIR = /home/myu/Gitdownloads/coding-adventure/GameDev/SimplePlatformer/build
 
 # Include any dependencies generated for this target.
 include CMakeFiles/SimplePlatformer.dir/depend.make
@@ -73,18 +73,18 @@ CMakeFiles/SimplePlatformer.dir/codegen:
 .PHONY : CMakeFiles/SimplePlatformer.dir/codegen
 
 CMakeFiles/SimplePlatformer.dir/main.c.o: CMakeFiles/SimplePlatformer.dir/flags.make
-CMakeFiles/SimplePlatformer.dir/main.c.o: /home/myu/GitDownloads/coding-adventure/GameDev/SimplePlatformer/main.c
+CMakeFiles/SimplePlatformer.dir/main.c.o: /home/myu/Gitdownloads/coding-adventure/GameDev/SimplePlatformer/main.c
 CMakeFiles/SimplePlatformer.dir/main.c.o: CMakeFiles/SimplePlatformer.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/myu/GitDownloads/coding-adventure/GameDev/SimplePlatformer/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object CMakeFiles/SimplePlatformer.dir/main.c.o"
-	/sbin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/SimplePlatformer.dir/main.c.o -MF CMakeFiles/SimplePlatformer.dir/main.c.o.d -o CMakeFiles/SimplePlatformer.dir/main.c.o -c /home/myu/GitDownloads/coding-adventure/GameDev/SimplePlatformer/main.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/myu/Gitdownloads/coding-adventure/GameDev/SimplePlatformer/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object CMakeFiles/SimplePlatformer.dir/main.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/SimplePlatformer.dir/main.c.o -MF CMakeFiles/SimplePlatformer.dir/main.c.o.d -o CMakeFiles/SimplePlatformer.dir/main.c.o -c /home/myu/Gitdownloads/coding-adventure/GameDev/SimplePlatformer/main.c
 
 CMakeFiles/SimplePlatformer.dir/main.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/SimplePlatformer.dir/main.c.i"
-	/sbin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/myu/GitDownloads/coding-adventure/GameDev/SimplePlatformer/main.c > CMakeFiles/SimplePlatformer.dir/main.c.i
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/myu/Gitdownloads/coding-adventure/GameDev/SimplePlatformer/main.c > CMakeFiles/SimplePlatformer.dir/main.c.i
 
 CMakeFiles/SimplePlatformer.dir/main.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/SimplePlatformer.dir/main.c.s"
-	/sbin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/myu/GitDownloads/coding-adventure/GameDev/SimplePlatformer/main.c -o CMakeFiles/SimplePlatformer.dir/main.c.s
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/myu/Gitdownloads/coding-adventure/GameDev/SimplePlatformer/main.c -o CMakeFiles/SimplePlatformer.dir/main.c.s
 
 # Object files for target SimplePlatformer
 SimplePlatformer_OBJECTS = \
@@ -93,20 +93,19 @@ SimplePlatformer_OBJECTS = \
 # External object files for target SimplePlatformer
 SimplePlatformer_EXTERNAL_OBJECTS =
 
-SimplePlatformer: CMakeFiles/SimplePlatformer.dir/main.c.o
-SimplePlatformer: CMakeFiles/SimplePlatformer.dir/build.make
-SimplePlatformer: CMakeFiles/SimplePlatformer.dir/compiler_depend.ts
-SimplePlatformer: /usr/local/lib/libtmx.a
-SimplePlatformer: /usr/local/lib/libraylib.so
-SimplePlatformer: /usr/lib/libX11.so
-SimplePlatformer: /usr/lib/libz.so
-SimplePlatformer: /usr/lib/libxml2.so
-SimplePlatformer: CMakeFiles/SimplePlatformer.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/myu/GitDownloads/coding-adventure/GameDev/SimplePlatformer/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking C executable SimplePlatformer"
+/home/myu/Gitdownloads/coding-adventure/GameDev/SimplePlatformer/SimplePlatformer: CMakeFiles/SimplePlatformer.dir/main.c.o
+/home/myu/Gitdownloads/coding-adventure/GameDev/SimplePlatformer/SimplePlatformer: CMakeFiles/SimplePlatformer.dir/build.make
+/home/myu/Gitdownloads/coding-adventure/GameDev/SimplePlatformer/SimplePlatformer: CMakeFiles/SimplePlatformer.dir/compiler_depend.ts
+/home/myu/Gitdownloads/coding-adventure/GameDev/SimplePlatformer/SimplePlatformer: /usr/local/lib/libtmx.a
+/home/myu/Gitdownloads/coding-adventure/GameDev/SimplePlatformer/SimplePlatformer: /usr/lib/libraylib.so
+/home/myu/Gitdownloads/coding-adventure/GameDev/SimplePlatformer/SimplePlatformer: /usr/lib/libz.so
+/home/myu/Gitdownloads/coding-adventure/GameDev/SimplePlatformer/SimplePlatformer: /usr/lib/libxml2.so
+/home/myu/Gitdownloads/coding-adventure/GameDev/SimplePlatformer/SimplePlatformer: CMakeFiles/SimplePlatformer.dir/link.txt
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/myu/Gitdownloads/coding-adventure/GameDev/SimplePlatformer/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking C executable /home/myu/Gitdownloads/coding-adventure/GameDev/SimplePlatformer/SimplePlatformer"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/SimplePlatformer.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
-CMakeFiles/SimplePlatformer.dir/build: SimplePlatformer
+CMakeFiles/SimplePlatformer.dir/build: /home/myu/Gitdownloads/coding-adventure/GameDev/SimplePlatformer/SimplePlatformer
 .PHONY : CMakeFiles/SimplePlatformer.dir/build
 
 CMakeFiles/SimplePlatformer.dir/clean:
@@ -114,6 +113,6 @@ CMakeFiles/SimplePlatformer.dir/clean:
 .PHONY : CMakeFiles/SimplePlatformer.dir/clean
 
 CMakeFiles/SimplePlatformer.dir/depend:
-	cd /home/myu/GitDownloads/coding-adventure/GameDev/SimplePlatformer/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/myu/GitDownloads/coding-adventure/GameDev/SimplePlatformer /home/myu/GitDownloads/coding-adventure/GameDev/SimplePlatformer /home/myu/GitDownloads/coding-adventure/GameDev/SimplePlatformer/build /home/myu/GitDownloads/coding-adventure/GameDev/SimplePlatformer/build /home/myu/GitDownloads/coding-adventure/GameDev/SimplePlatformer/build/CMakeFiles/SimplePlatformer.dir/DependInfo.cmake "--color=$(COLOR)"
+	cd /home/myu/Gitdownloads/coding-adventure/GameDev/SimplePlatformer/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/myu/Gitdownloads/coding-adventure/GameDev/SimplePlatformer /home/myu/Gitdownloads/coding-adventure/GameDev/SimplePlatformer /home/myu/Gitdownloads/coding-adventure/GameDev/SimplePlatformer/build /home/myu/Gitdownloads/coding-adventure/GameDev/SimplePlatformer/build /home/myu/Gitdownloads/coding-adventure/GameDev/SimplePlatformer/build/CMakeFiles/SimplePlatformer.dir/DependInfo.cmake "--color=$(COLOR)"
 .PHONY : CMakeFiles/SimplePlatformer.dir/depend
 

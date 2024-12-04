@@ -8,8 +8,8 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
-  "/home/myu/GitDownloads/coding-adventure/GameDev/SimplePlatformer/main.c" "CMakeFiles/SimplePlatformer.dir/main.c.o" "gcc" "CMakeFiles/SimplePlatformer.dir/main.c.o.d"
-  "" "SimplePlatformer" "gcc" "CMakeFiles/SimplePlatformer.dir/link.d"
+  "/home/myu/Gitdownloads/coding-adventure/GameDev/SimplePlatformer/main.c" "CMakeFiles/SimplePlatformer.dir/main.c.o" "gcc" "CMakeFiles/SimplePlatformer.dir/main.c.o.d"
+  "" "/home/myu/Gitdownloads/coding-adventure/GameDev/SimplePlatformer/SimplePlatformer" "gcc" "CMakeFiles/SimplePlatformer.dir/link.d"
   )
 
 # Targets to which this target links which contain Fortran sources.
