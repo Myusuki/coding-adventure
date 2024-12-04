@@ -1,1 +1,1 @@
-/sbin/cc -Wl,--dependency-file,CMakeFiles/2DCamera.dir/link.d CMakeFiles/2DCamera.dir/main.c.o -o 2DCamera  /usr/lib/libraylib.so -lX11:X11 -L/usr/lib -lraylib
+/usr/bin/cc -Wl,--dependency-file,CMakeFiles/2DCamera.dir/link.d CMakeFiles/2DCamera.dir/main.c.o -o /home/myu/Gitdownloads/coding-adventure/GameDev/RaylibPlayground/Examples/Core/8-2dCamera/2DCamera  /usr/lib/libraylib.so -lX11 -L/usr/lib -lraylib

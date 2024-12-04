@@ -53,10 +53,10 @@ RM = /usr/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/myu/GitDownloads/coding-adventure/GameDev/RaylibPlayground/Examples/Core/8-2dCamera
+CMAKE_SOURCE_DIR = /home/myu/Gitdownloads/coding-adventure/GameDev/RaylibPlayground/Examples/Core/8-2dCamera
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/myu/GitDownloads/coding-adventure/GameDev/RaylibPlayground/Examples/Core/8-2dCamera/build
+CMAKE_BINARY_DIR = /home/myu/Gitdownloads/coding-adventure/GameDev/RaylibPlayground/Examples/Core/8-2dCamera/build
 
 # Include any dependencies generated for this target.
 include CMakeFiles/2DCamera.dir/depend.make
@@ -73,18 +73,18 @@ CMakeFiles/2DCamera.dir/codegen:
 .PHONY : CMakeFiles/2DCamera.dir/codegen
 
 CMakeFiles/2DCamera.dir/main.c.o: CMakeFiles/2DCamera.dir/flags.make
-CMakeFiles/2DCamera.dir/main.c.o: /home/myu/GitDownloads/coding-adventure/GameDev/RaylibPlayground/Examples/Core/8-2dCamera/main.c
+CMakeFiles/2DCamera.dir/main.c.o: /home/myu/Gitdownloads/coding-adventure/GameDev/RaylibPlayground/Examples/Core/8-2dCamera/main.c
 CMakeFiles/2DCamera.dir/main.c.o: CMakeFiles/2DCamera.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/myu/GitDownloads/coding-adventure/GameDev/RaylibPlayground/Examples/Core/8-2dCamera/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object CMakeFiles/2DCamera.dir/main.c.o"
-	/sbin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/2DCamera.dir/main.c.o -MF CMakeFiles/2DCamera.dir/main.c.o.d -o CMakeFiles/2DCamera.dir/main.c.o -c /home/myu/GitDownloads/coding-adventure/GameDev/RaylibPlayground/Examples/Core/8-2dCamera/main.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/myu/Gitdownloads/coding-adventure/GameDev/RaylibPlayground/Examples/Core/8-2dCamera/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object CMakeFiles/2DCamera.dir/main.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/2DCamera.dir/main.c.o -MF CMakeFiles/2DCamera.dir/main.c.o.d -o CMakeFiles/2DCamera.dir/main.c.o -c /home/myu/Gitdownloads/coding-adventure/GameDev/RaylibPlayground/Examples/Core/8-2dCamera/main.c
 
 CMakeFiles/2DCamera.dir/main.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/2DCamera.dir/main.c.i"
-	/sbin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/myu/GitDownloads/coding-adventure/GameDev/RaylibPlayground/Examples/Core/8-2dCamera/main.c > CMakeFiles/2DCamera.dir/main.c.i
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/myu/Gitdownloads/coding-adventure/GameDev/RaylibPlayground/Examples/Core/8-2dCamera/main.c > CMakeFiles/2DCamera.dir/main.c.i
 
 CMakeFiles/2DCamera.dir/main.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/2DCamera.dir/main.c.s"
-	/sbin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/myu/GitDownloads/coding-adventure/GameDev/RaylibPlayground/Examples/Core/8-2dCamera/main.c -o CMakeFiles/2DCamera.dir/main.c.s
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/myu/Gitdownloads/coding-adventure/GameDev/RaylibPlayground/Examples/Core/8-2dCamera/main.c -o CMakeFiles/2DCamera.dir/main.c.s
 
 # Object files for target 2DCamera
 2DCamera_OBJECTS = \
@@ -93,16 +93,16 @@ CMakeFiles/2DCamera.dir/main.c.s: cmake_force
 # External object files for target 2DCamera
 2DCamera_EXTERNAL_OBJECTS =
 
-2DCamera: CMakeFiles/2DCamera.dir/main.c.o
-2DCamera: CMakeFiles/2DCamera.dir/build.make
-2DCamera: CMakeFiles/2DCamera.dir/compiler_depend.ts
-2DCamera: /usr/lib/libraylib.so
-2DCamera: CMakeFiles/2DCamera.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/myu/GitDownloads/coding-adventure/GameDev/RaylibPlayground/Examples/Core/8-2dCamera/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking C executable 2DCamera"
+/home/myu/Gitdownloads/coding-adventure/GameDev/RaylibPlayground/Examples/Core/8-2dCamera/2DCamera: CMakeFiles/2DCamera.dir/main.c.o
+/home/myu/Gitdownloads/coding-adventure/GameDev/RaylibPlayground/Examples/Core/8-2dCamera/2DCamera: CMakeFiles/2DCamera.dir/build.make
+/home/myu/Gitdownloads/coding-adventure/GameDev/RaylibPlayground/Examples/Core/8-2dCamera/2DCamera: CMakeFiles/2DCamera.dir/compiler_depend.ts
+/home/myu/Gitdownloads/coding-adventure/GameDev/RaylibPlayground/Examples/Core/8-2dCamera/2DCamera: /usr/lib/libraylib.so
+/home/myu/Gitdownloads/coding-adventure/GameDev/RaylibPlayground/Examples/Core/8-2dCamera/2DCamera: CMakeFiles/2DCamera.dir/link.txt
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/myu/Gitdownloads/coding-adventure/GameDev/RaylibPlayground/Examples/Core/8-2dCamera/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking C executable /home/myu/Gitdownloads/coding-adventure/GameDev/RaylibPlayground/Examples/Core/8-2dCamera/2DCamera"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/2DCamera.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
-CMakeFiles/2DCamera.dir/build: 2DCamera
+CMakeFiles/2DCamera.dir/build: /home/myu/Gitdownloads/coding-adventure/GameDev/RaylibPlayground/Examples/Core/8-2dCamera/2DCamera
 .PHONY : CMakeFiles/2DCamera.dir/build
 
 CMakeFiles/2DCamera.dir/clean:
@@ -110,6 +110,6 @@ CMakeFiles/2DCamera.dir/clean:
 .PHONY : CMakeFiles/2DCamera.dir/clean
 
 CMakeFiles/2DCamera.dir/depend:
-	cd /home/myu/GitDownloads/coding-adventure/GameDev/RaylibPlayground/Examples/Core/8-2dCamera/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/myu/GitDownloads/coding-adventure/GameDev/RaylibPlayground/Examples/Core/8-2dCamera /home/myu/GitDownloads/coding-adventure/GameDev/RaylibPlayground/Examples/Core/8-2dCamera /home/myu/GitDownloads/coding-adventure/GameDev/RaylibPlayground/Examples/Core/8-2dCamera/build /home/myu/GitDownloads/coding-adventure/GameDev/RaylibPlayground/Examples/Core/8-2dCamera/build /home/myu/GitDownloads/coding-adventure/GameDev/RaylibPlayground/Examples/Core/8-2dCamera/build/CMakeFiles/2DCamera.dir/DependInfo.cmake "--color=$(COLOR)"
+	cd /home/myu/Gitdownloads/coding-adventure/GameDev/RaylibPlayground/Examples/Core/8-2dCamera/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/myu/Gitdownloads/coding-adventure/GameDev/RaylibPlayground/Examples/Core/8-2dCamera /home/myu/Gitdownloads/coding-adventure/GameDev/RaylibPlayground/Examples/Core/8-2dCamera /home/myu/Gitdownloads/coding-adventure/GameDev/RaylibPlayground/Examples/Core/8-2dCamera/build /home/myu/Gitdownloads/coding-adventure/GameDev/RaylibPlayground/Examples/Core/8-2dCamera/build /home/myu/Gitdownloads/coding-adventure/GameDev/RaylibPlayground/Examples/Core/8-2dCamera/build/CMakeFiles/2DCamera.dir/DependInfo.cmake "--color=$(COLOR)"
 .PHONY : CMakeFiles/2DCamera.dir/depend
 

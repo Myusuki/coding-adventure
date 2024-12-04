@@ -1,7 +1,7 @@
 file(REMOVE_RECURSE
+  "/home/myu/Gitdownloads/coding-adventure/GameDev/RaylibPlayground/Examples/Core/8-2dCamera/2DCamera"
+  "/home/myu/Gitdownloads/coding-adventure/GameDev/RaylibPlayground/Examples/Core/8-2dCamera/2DCamera.pdb"
   "CMakeFiles/2DCamera.dir/link.d"
-  "2DCamera"
-  "2DCamera.pdb"
   "CMakeFiles/2DCamera.dir/main.c.o"
   "CMakeFiles/2DCamera.dir/main.c.o.d"
 )

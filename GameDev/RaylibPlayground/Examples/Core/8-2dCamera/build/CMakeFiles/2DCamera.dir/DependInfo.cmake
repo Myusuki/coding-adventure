@@ -8,8 +8,8 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
-  "/home/myu/GitDownloads/coding-adventure/GameDev/RaylibPlayground/Examples/Core/8-2dCamera/main.c" "CMakeFiles/2DCamera.dir/main.c.o" "gcc" "CMakeFiles/2DCamera.dir/main.c.o.d"
-  "" "2DCamera" "gcc" "CMakeFiles/2DCamera.dir/link.d"
+  "/home/myu/Gitdownloads/coding-adventure/GameDev/RaylibPlayground/Examples/Core/8-2dCamera/main.c" "CMakeFiles/2DCamera.dir/main.c.o" "gcc" "CMakeFiles/2DCamera.dir/main.c.o.d"
+  "" "/home/myu/Gitdownloads/coding-adventure/GameDev/RaylibPlayground/Examples/Core/8-2dCamera/2DCamera" "gcc" "CMakeFiles/2DCamera.dir/link.d"
   )
 
 # Targets to which this target links which contain Fortran sources.
