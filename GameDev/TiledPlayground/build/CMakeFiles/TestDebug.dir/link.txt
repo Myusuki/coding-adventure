@@ -1,0 +1,1 @@
+/usr/bin/cc -g -Wl,--dependency-file,CMakeFiles/TestDebug.dir/link.d CMakeFiles/TestDebug.dir/main.c.o -o /home/myu/Gitdownloads/coding-adventure/GameDev/TiledPlayground/TestDebug  /usr/local/lib/libtmx.a /usr/lib/libraylib.so /usr/lib/libz.so /usr/lib/libxml2.so -L/usr/lib -lraylib

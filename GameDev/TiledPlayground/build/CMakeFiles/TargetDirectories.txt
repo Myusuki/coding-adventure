@@ -1,0 +1,3 @@
+/home/myu/Gitdownloads/coding-adventure/GameDev/TiledPlayground/build/CMakeFiles/Test.dir
+/home/myu/Gitdownloads/coding-adventure/GameDev/TiledPlayground/build/CMakeFiles/edit_cache.dir
+/home/myu/Gitdownloads/coding-adventure/GameDev/TiledPlayground/build/CMakeFiles/rebuild_cache.dir
