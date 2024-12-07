@@ -18,7 +18,7 @@
             "selectedLayer": 0,
             "viewCenter": {
                 "x": 462.7146814404432,
-                "y": 377.56232686980604
+                "y": 374.34903047091404
             }
         }
     },
@@ -35,8 +35,8 @@
     ],
     "project": "Test_Platformer.tiled-project",
     "recentFiles": [
-        "island.tmx",
-        "beach_tileset.tsx"
+        "beach_tileset.tsx",
+        "island.tmx"
     ],
     "tileset.lastUsedFormat": "tsx",
     "tileset.tileSize": {
