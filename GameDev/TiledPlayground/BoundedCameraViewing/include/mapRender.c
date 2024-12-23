@@ -67,9 +67,6 @@ void draw_all_layers(tmx_map *map, tmx_layer *layers)
         case L_GROUP:
           draw_all_layers(map, layers->content.group_head);
           break;
-        // case L_OBJGR:
-        //   draw_objects(layers->content.objgr);
-        //   break;
         case L_IMAGE:
           draw_image_layer(layers->content.image);
           break;
