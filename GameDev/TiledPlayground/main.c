@@ -28,8 +28,6 @@ int main(void)
   unsigned int mapTilecount = map->tilecount;
   tmx_tile **mapTiles = map->tiles;
 
-
-
   while( tilesetHead != NULL )
   {
     printf( "%s\n", tilesetHead->source);
@@ -41,10 +39,6 @@ int main(void)
     layerHead = layerHead->next;
   }
   printf("%d\n", mapTilecount );
-
-
-
-
 
   return 0;
 }
