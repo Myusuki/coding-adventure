@@ -1,0 +1,1 @@
+/usr/bin/cc -Wl,--dependency-file=CMakeFiles/WindowResizing.dir/link.d CMakeFiles/WindowResizing.dir/main.c.o -o /home/myu/Gitdownloads/coding-adventure/GameDev/RaylibPlayground/Examples/Core/10WindowResizing/WindowResizing  /usr/lib/libraylib.so -lm -lX11 -L/usr/lib -lraylib

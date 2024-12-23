@@ -1,0 +1,3 @@
+/home/myu/Gitdownloads/coding-adventure/GameDev/RaylibPlayground/Examples/Core/10WindowResizing/build/CMakeFiles/WindowResizing.dir
+/home/myu/Gitdownloads/coding-adventure/GameDev/RaylibPlayground/Examples/Core/10WindowResizing/build/CMakeFiles/edit_cache.dir
+/home/myu/Gitdownloads/coding-adventure/GameDev/RaylibPlayground/Examples/Core/10WindowResizing/build/CMakeFiles/rebuild_cache.dir
