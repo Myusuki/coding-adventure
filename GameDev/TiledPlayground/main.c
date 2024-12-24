@@ -28,9 +28,15 @@ int main(void)
   unsigned int mapTilecount = map->tilecount;
   tmx_tile **mapTiles = map->tiles;
 
-  while( tilesetHead != NULL )
+  while( tilesetHead )
   {
     printf( "%s\n", tilesetHead->source);
+    tmx_tileset *tileset = tilesetHead->tileset;
+    printf( "Tileset Tilecount: %d\n", tileset->tilecount );
+    tmx_tile checkTile = tileset->tiles[57];
+    unsigned int checkTileCollision = checkTile.collision->obj_type;
+    printf( "Tile Collision Type: %d\n", checkTileCollision );
+
     tilesetHead = tilesetHead->next;
   }
   while( layerHead != NULL )
