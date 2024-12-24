@@ -2,6 +2,8 @@ file(REMOVE_RECURSE
   "/home/myu/Gitdownloads/coding-adventure/GameDev/SimplePlatformer/SimplePlatformer"
   "/home/myu/Gitdownloads/coding-adventure/GameDev/SimplePlatformer/SimplePlatformer.pdb"
   "CMakeFiles/SimplePlatformer.dir/link.d"
+  "CMakeFiles/SimplePlatformer.dir/include/mapRender.c.o"
+  "CMakeFiles/SimplePlatformer.dir/include/mapRender.c.o.d"
   "CMakeFiles/SimplePlatformer.dir/main.c.o"
   "CMakeFiles/SimplePlatformer.dir/main.c.o.d"
 )

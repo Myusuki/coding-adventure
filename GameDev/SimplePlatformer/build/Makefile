@@ -129,6 +129,30 @@ SimplePlatformer/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/SimplePlatformer.dir/build.make CMakeFiles/SimplePlatformer.dir/build
 .PHONY : SimplePlatformer/fast
 
+include/mapRender.o: include/mapRender.c.o
+.PHONY : include/mapRender.o
+
+# target to build an object file
+include/mapRender.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SimplePlatformer.dir/build.make CMakeFiles/SimplePlatformer.dir/include/mapRender.c.o
+.PHONY : include/mapRender.c.o
+
+include/mapRender.i: include/mapRender.c.i
+.PHONY : include/mapRender.i
+
+# target to preprocess a source file
+include/mapRender.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SimplePlatformer.dir/build.make CMakeFiles/SimplePlatformer.dir/include/mapRender.c.i
+.PHONY : include/mapRender.c.i
+
+include/mapRender.s: include/mapRender.c.s
+.PHONY : include/mapRender.s
+
+# target to generate assembly for a file
+include/mapRender.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SimplePlatformer.dir/build.make CMakeFiles/SimplePlatformer.dir/include/mapRender.c.s
+.PHONY : include/mapRender.c.s
+
 main.o: main.c.o
 .PHONY : main.o
 
@@ -162,6 +186,9 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... SimplePlatformer"
+	@echo "... include/mapRender.o"
+	@echo "... include/mapRender.i"
+	@echo "... include/mapRender.s"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"
