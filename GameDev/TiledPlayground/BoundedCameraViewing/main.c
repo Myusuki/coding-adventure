@@ -69,13 +69,13 @@ int main(int argc, char **argv)
     if( CameraCheckPos1.y > 0 )
     {
       if( IsKeyDown(KEY_UP) )
-        camera.target.y -= 8;
+        camera.target.y -= 16;
     }
     // if( CheckCollisionPointRec(bottomCameraCheckPos, mapRect) )
     if( CameraCheckPos2.y < (map->tile_height * map->height))
     {
       if( IsKeyDown(KEY_DOWN) )
-        camera.target.y += 8;
+        camera.target.y += 16;
     }
     // reset
     if( IsKeyPressed(KEY_R) )
