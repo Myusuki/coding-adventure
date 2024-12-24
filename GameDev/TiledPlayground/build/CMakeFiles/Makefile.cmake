@@ -8,8 +8,8 @@ set(CMAKE_DEPENDS_GENERATOR "Unix Makefiles")
 set(CMAKE_MAKEFILE_DEPENDS
   "CMakeCache.txt"
   "/home/myu/Gitdownloads/coding-adventure/GameDev/TiledPlayground/CMakeLists.txt"
-  "CMakeFiles/3.31.1/CMakeCCompiler.cmake"
-  "CMakeFiles/3.31.1/CMakeSystem.cmake"
+  "CMakeFiles/3.31.3/CMakeCCompiler.cmake"
+  "CMakeFiles/3.31.3/CMakeSystem.cmake"
   "/usr/lib/cmake/raylib/raylib-config-version.cmake"
   "/usr/lib/cmake/raylib/raylib-config.cmake"
   "/usr/local/lib/cmake/tmx/tmxConfig.cmake"

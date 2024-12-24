@@ -102,6 +102,7 @@ Test: CMakeFiles/Test.dir/rule
 # codegen rule for target.
 CMakeFiles/Test.dir/codegen:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Test.dir/build.make CMakeFiles/Test.dir/codegen
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/myu/Gitdownloads/coding-adventure/GameDev/TiledPlayground/build/CMakeFiles --progress-num=1,2 "Finished codegen for target Test"
 .PHONY : CMakeFiles/Test.dir/codegen
 
 # clean rule for target.

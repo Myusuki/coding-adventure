@@ -1,1 +1,1 @@
-/usr/bin/cc -g -Wl,--dependency-file,CMakeFiles/Test.dir/link.d CMakeFiles/Test.dir/main.c.o -o /home/myu/Gitdownloads/coding-adventure/GameDev/TiledPlayground/Test  /usr/local/lib/libtmx.a /usr/lib/libraylib.so -lX11 /usr/lib/libz.so /usr/lib/libxml2.so -L/usr/lib -lraylib
+/usr/bin/cc -g -Wl,--dependency-file=CMakeFiles/Test.dir/link.d CMakeFiles/Test.dir/main.c.o -o /home/myu/Gitdownloads/coding-adventure/GameDev/TiledPlayground/Test  /usr/local/lib/libtmx.a /usr/lib/libraylib.so -lX11 /usr/lib/libz.so /usr/lib/libxml2.so -L/usr/lib -lraylib
