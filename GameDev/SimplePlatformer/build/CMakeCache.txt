@@ -28,7 +28,7 @@ CMAKE_BUILD_TYPE:STRING=DEBUG
 CMAKE_COLOR_MAKEFILE:BOOL=ON
 
 //C compiler
-CMAKE_C_COMPILER:STRING=/usr/bin/cc
+CMAKE_C_COMPILER:FILEPATH=/usr/bin/cc
 
 //A wrapper around 'ar' adding the appropriate '--plugin' option
 // for the GCC compiler
@@ -877,11 +877,11 @@ PC_LIBXML_STATIC_CFLAGS:INTERNAL=-I/usr/include/libxml2;-I/usr/include;-DLZMA_AP
 PC_LIBXML_STATIC_CFLAGS_I:INTERNAL=
 PC_LIBXML_STATIC_CFLAGS_OTHER:INTERNAL=-DLZMA_API_STATIC
 PC_LIBXML_STATIC_INCLUDE_DIRS:INTERNAL=/usr/include/libxml2;/usr/include
-PC_LIBXML_STATIC_LDFLAGS:INTERNAL=-L/usr/lib;-lxml2;-lm;-licuuc;-licudata;-lpthread;-lm;-L/usr/lib;-L/usr/lib;-lz;-llzma;-pthread;-lpthread;-licui18n
+PC_LIBXML_STATIC_LDFLAGS:INTERNAL=-L/usr/lib;-lxml2;-lm;-lz;-llzma;-pthread;-lpthread;-licui18n;-licuuc;-licudata;-lpthread;-lm
 PC_LIBXML_STATIC_LDFLAGS_OTHER:INTERNAL=-pthread
 PC_LIBXML_STATIC_LIBDIR:INTERNAL=
-PC_LIBXML_STATIC_LIBRARIES:INTERNAL=xml2;m;icuuc;icudata;pthread;m;z;lzma;pthread;icui18n
-PC_LIBXML_STATIC_LIBRARY_DIRS:INTERNAL=/usr/lib;/usr/lib;/usr/lib
+PC_LIBXML_STATIC_LIBRARIES:INTERNAL=xml2;m;z;lzma;pthread;icui18n;icuuc;icudata;pthread;m
+PC_LIBXML_STATIC_LIBRARY_DIRS:INTERNAL=/usr/lib
 PC_LIBXML_STATIC_LIBS:INTERNAL=
 PC_LIBXML_STATIC_LIBS_L:INTERNAL=
 PC_LIBXML_STATIC_LIBS_OTHER:INTERNAL=
@@ -951,11 +951,11 @@ PKG_FONTCONFIG_STATIC_CFLAGS:INTERNAL=-I/usr/include;-I/usr/include/freetype2;-I
 PKG_FONTCONFIG_STATIC_CFLAGS_I:INTERNAL=
 PKG_FONTCONFIG_STATIC_CFLAGS_OTHER:INTERNAL=-pthread;-DXML_STATIC
 PKG_FONTCONFIG_STATIC_INCLUDE_DIRS:INTERNAL=/usr/include;/usr/include/freetype2;/usr/include/libpng16;/usr/include/harfbuzz;/usr/include/glib-2.0;/usr/lib/glib-2.0/include;/usr/include/sysprof-6
-PKG_FONTCONFIG_STATIC_LDFLAGS:INTERNAL=-L/usr/lib;-lfontconfig;-pthread;-lfreetype;-L/usr/lib;-lbz2;-lpng16;-lm;-lm;-lz;-lharfbuzz;-pthread;-lm;-lglib-2.0;-lm;-lsysprof-capture-4;-pthread;-lpcre2-8;-lgraphite2;-lbrotlidec;-lbrotlicommon;-lexpat;-lm
+PKG_FONTCONFIG_STATIC_LDFLAGS:INTERNAL=-L/usr/lib;-lfontconfig;-pthread;-lfreetype;-lbz2;-lpng16;-lm;-lm;-lz;-lharfbuzz;-pthread;-lm;-lglib-2.0;-lm;-lsysprof-capture-4;-pthread;-lpcre2-8;-lgraphite2;-lbrotlidec;-lbrotlicommon;-lexpat;-lm
 PKG_FONTCONFIG_STATIC_LDFLAGS_OTHER:INTERNAL=-pthread;-pthread;-pthread
 PKG_FONTCONFIG_STATIC_LIBDIR:INTERNAL=
 PKG_FONTCONFIG_STATIC_LIBRARIES:INTERNAL=fontconfig;freetype;bz2;png16;m;m;z;harfbuzz;m;glib-2.0;m;sysprof-capture-4;pcre2-8;graphite2;brotlidec;brotlicommon;expat;m
-PKG_FONTCONFIG_STATIC_LIBRARY_DIRS:INTERNAL=/usr/lib;/usr/lib
+PKG_FONTCONFIG_STATIC_LIBRARY_DIRS:INTERNAL=/usr/lib
 PKG_FONTCONFIG_STATIC_LIBS:INTERNAL=
 PKG_FONTCONFIG_STATIC_LIBS_L:INTERNAL=
 PKG_FONTCONFIG_STATIC_LIBS_OTHER:INTERNAL=

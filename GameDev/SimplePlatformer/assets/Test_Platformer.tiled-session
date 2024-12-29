@@ -3,22 +3,23 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "island.tmx",
+    "activeFile": "Gameboy.tsx",
     "expandedProjectPaths": [
         "."
     ],
     "file.lastUsedOpenFilter": "All Files (*)",
     "fileStates": {
         "GameBoyTest.tmx": {
-            "scale": 8,
+            "scale": 3,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 800,
-                "y": 799.9375
+                "x": 1282.1666666666665,
+                "y": 982.8333333333333
             }
         },
         "Gameboy.tsx": {
-            "scaleInDock": 3
+            "scaleInDock": 3,
+            "scaleInEditor": 4
         },
         "beach_tileset.tsx": {
             "scaleInDock": 1,
@@ -42,12 +43,13 @@
     "map.width": 100,
     "openFiles": [
         "GameBoyTest.tmx",
-        "island.tmx"
+        "Gameboy.tsx"
     ],
     "project": "Test_Platformer.tiled-project",
     "recentFiles": [
-        "island.tmx",
         "GameBoyTest.tmx",
+        "Gameboy.tsx",
+        "island.tmx",
         "beach_tileset.tsx"
     ],
     "tileset.lastUsedFormat": "tsx",
