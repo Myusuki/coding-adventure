@@ -4,20 +4,23 @@
 #include <raylib.h>
 #include <tmx.h>
 
-// display dimensions
-#define DISPLAY_H 640
-#define DISPLAY_W 800
+// window dimensions
+#define windowWidth 800
+#define windowHeight 640
 
-void render_map(tmx_map *map); // main render function to call
-void draw_all_layers(tmx_map *map, tmx_layer *layers);
-
-// draw tile layer
-void draw_tile_layer(tmx_map *map, tmx_layer *layer);
-void draw_tile(void *image, unsigned int sourceX, unsigned int sourceY, unsigned int sourceWidth, unsigned int sourceHeight,
-               unsigned int destX, unsigned int destY, float opacity, unsigned int flags);
-
-void draw_image_layer(tmx_image *image);
-
-Color int_to_color(int color);
+// map render functions
+// tmx callback glob funcs
+// load 
+void* RaylibTexLoad( const char *path );
+// free
+void RaylibTexFree( void *ptr );
+// main render function
+void RenderMap( tmx_map *map );
+// convert background color to raylib color
+Color IntToColor( int color );
+// draw tile layers
+void DrawTileLayer( tmx_map *map, tmx_layer *layer );
+// draw tiles
+void DrawTile( void *image, Rectangle sourceRect, Vector2 destPos, float opacity, unsigned int flags );
 
 #endif

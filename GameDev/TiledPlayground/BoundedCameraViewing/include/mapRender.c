@@ -1,88 +1,78 @@
-#include <stdlib.h>
-#include <stdio.h>
-#include <raylib.h>
-#include <tmx.h>
 #include "mapRender.h"
+#include <stdlib.h>
 
-Color int_to_color(int color)
+void RenderMap( tmx_map *map )
 {
-	tmx_col_bytes res = tmx_col_to_bytes(color);
-	return *((Color*)&res);
-}
+  ClearBackground(IntToColor(map->backgroundcolor) );
 
-void draw_image_layer(tmx_image *image)
-{
-	Texture2D *texture = (Texture2D*)image->resource_image;
-	DrawTexture(*texture, 0, 0, WHITE);
-}
-
-void draw_tile(void *image, unsigned int sourceX, unsigned int sourceY, unsigned int sourceWidth, unsigned int sourceHeight,
-               unsigned int destX, unsigned int destY, float opacity, unsigned int flags)
-{
-    Texture2D *texture = (Texture2D*)image;
-    int op = 0xFF * opacity;
-    DrawTextureRec(*texture, (Rectangle) {sourceX, sourceY, sourceWidth, sourceHeight}, (Vector2) {destX, destY}, (Color) {op, op, op, op});
-}
-
-void draw_tile_layer(tmx_map *map, tmx_layer *layer)
-{
-	unsigned long i, j;
-	unsigned int gid, x, y, w, h, flags;
-	float op;
-	tmx_tileset *ts;
-	tmx_image *im;
-	void* image;
-	op = layer->opacity;
-	for (i=0; i<map->height; i++) {
-		for (j=0; j<map->width; j++) {
-			gid = (layer->content.gids[(i*map->width)+j]) & TMX_FLIP_BITS_REMOVAL;
-			if (map->tiles[gid] != NULL) {
-				ts = map->tiles[gid]->tileset;
-				im = map->tiles[gid]->image;
-				x  = map->tiles[gid]->ul_x;
-				y  = map->tiles[gid]->ul_y;
-				w  = ts->tile_width;
-				h  = ts->tile_height;
-				if (im) {
-          image = im->resource_image;
-				}
-				else {
-          image = ts->image->resource_image;
-				}
-				flags = (layer->content.gids[(i*map->width)+j]) & ~TMX_FLIP_BITS_REMOVAL;
-        draw_tile(image, x, y, w, h, j*ts->tile_width, i*ts->tile_height, op, flags);
-			}
-		}
-	}
-}
-
-void draw_all_layers(tmx_map *map, tmx_layer *layers)
-{
-	while (layers)
+  tmx_layer *layerHead = map->ly_head;
+  while( layerHead )
   {
-		if (layers->visible)
-    {
-      switch( layers->type )
-      {
-        case L_GROUP:
-          draw_all_layers(map, layers->content.group_head);
-          break;
-        case L_IMAGE:
-          draw_image_layer(layers->content.image);
-          break;
-        case L_LAYER:
-          draw_tile_layer(map, layers);
-          break;
-        default:
-          break;
-      }
-		}
-		layers = layers->next;
-	}
+    if( layerHead->type == L_LAYER )
+      DrawTileLayer(map, layerHead);
+
+    layerHead = layerHead->next;
+  }
+}
+Color IntToColor( int color )
+{
+  tmx_col_floats colorValues = tmx_col_to_floats(color);
+  return (Color){ colorValues.r, colorValues.g, colorValues.b, colorValues.a };
 }
 
-void render_map(tmx_map *map)
+void DrawTile( void *image, Rectangle sourceRect, Vector2 destPos, float opacity, unsigned int flags)
 {
-	ClearBackground(int_to_color(map->backgroundcolor));
-	draw_all_layers(map, map->ly_head);
+  Texture2D *texture = (Texture2D*)image;
+
+  int op = 0xFF * opacity;
+  DrawTextureRec(*texture, sourceRect, destPos, (Color){op, op, op, op} );
+}
+void DrawTileLayer( tmx_map *map, tmx_layer *layer )
+{
+  float opacity = layer->opacity;
+  void* imagePtr;
+  tmx_tileset *tileset;
+  tmx_image *image;
+
+  for( unsigned long columns = 0; columns < map->height; columns++ )
+  {
+    for( unsigned long rows = 0; rows < map->width; rows++ )
+    {
+      unsigned int gid = ( layer->content.gids[ (columns * map->width) + rows] ) &TMX_FLIP_BITS_REMOVAL;
+
+      if( map->tiles[gid] != NULL )
+      {
+        tileset = map->tiles[gid]->tileset;
+        image = map->tiles[gid]->image;
+        unsigned int x = map->tiles[gid]->ul_x;
+        unsigned int y = map->tiles[gid]->ul_y;
+        unsigned int w = tileset->tile_width;
+        unsigned int h = tileset->tile_height;
+
+        if( image )
+          imagePtr = image->resource_image;
+        else
+          imagePtr = tileset->image->resource_image;
+
+        unsigned int flags = ( layer->content.gids[ (columns * map->width) + rows ]) & ~TMX_FLIP_BITS_REMOVAL;
+
+        Rectangle sourceRectangle = { .x = x, .y = y, .width = w, .height = h };
+        Vector2 destPosition = (Vector2){ rows * tileset->tile_width, columns * tileset->tile_height };
+        DrawTile(imagePtr, sourceRectangle, destPosition, opacity, flags);
+      }
+    }
+  }
+}
+
+
+void* RaylibTexLoad( const char *path )
+{
+  Texture2D *texture = malloc( sizeof(Texture2D) );
+  *texture = LoadTexture(path);
+  return texture;
+}
+void RaylibTexFree( void *ptr )
+{
+  UnloadTexture( *( (Texture2D*)ptr) );
+  free(ptr);
 }
