@@ -23,7 +23,7 @@ int main(void)
   tmx_img_load_func = RaylibTexLoad;
   tmx_img_free_func = RaylibTexFree;
 
-  tmx_map *map = tmx_load("../assets/GameBoyTest.tmx");
+  tmx_map *map = tmx_load("../assets/CaveRuinsEntrance.tmx");
   if( map == NULL )
   {
     tmx_perror( "Could not load CaveRuinsEntrance.tmx");
@@ -38,27 +38,30 @@ int main(void)
   Rectangle mapRect = { .x = 0, .y = 0, .width = (map->tile_width * map->width), .height = (map->tile_height * map->height) };
   Player player = { .position = (Vector2){ (mapRect.width / 2), (mapRect.height / 2) },
                    .hurtbox = (Rectangle){ (player.position.x - 16), (player.position.y - 16), 32, 32 },
-                   .speed = (Vector2){ 128, 128 }, .canJump = false };
+                   .speed = (Vector2){ 128, 128 }, .collided = false };
   Camera2D camera = { .target = player.position,
                       .offset = (Vector2){ (windowWidth / 2.0f), (windowHeight / 2.0f) },
                       .rotation = 0.0f, .zoom = 5.0f };
 
   while( !WindowShouldClose() )
   {
+    printf( "Map Width: %d\n", map->width );
+    printf( "Map Height: %d\n", map->height );
     // input handling and logic
     printf( "Screen Width: %d\n", GetScreenWidth() );
     printf( "Screen Height: %d\n", GetScreenHeight() );
     float scale = MIN( (float)GetScreenWidth() / windowWidth, (float) GetScreenHeight() / windowHeight ); 
     printf( "Scale Factor: %f\n", scale );
 
-    UpdatePlayer(&camera, &player, windowWidth, windowHeight, mapRect, GetFrameTime() );
+    UpdatePlayer(map, &camera, &player, (Vector2){ windowWidth, windowHeight}, mapRect, GetFrameTime() );
+    printf( "Player Collision: %d\n", player.collided );
 
     // draw
     // draw to render texture
     BeginTextureMode(targetTexture);
       BeginMode2D(camera);
         RenderMap(map);
-        DrawRectangleRec(player.hurtbox, BLACK);
+        DrawPlayer(&player, player.collided);
       EndMode2D();
     EndTextureMode();
     // draw to screen
@@ -75,4 +78,3 @@ int main(void)
 
   return 0;
 }
-

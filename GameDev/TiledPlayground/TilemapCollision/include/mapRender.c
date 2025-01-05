@@ -1,5 +1,13 @@
 #include "mapRender.h"
 #include <stdlib.h>
+#include <stdio.h>
+#include <raylib.h>
+#include <tmx.h>
+
+Color IntToColor( int color );
+void DrawTile( void *image, Rectangle sourceRect, Vector2 destPos, float opacity, unsigned int flags );
+void DrawTileCollision( tmx_tile *tile, Vector2 destPos );
+void DrawTileLayer( tmx_map *map, tmx_layer *layer );
 
 void RenderMap( tmx_map *map )
 {
@@ -20,12 +28,24 @@ Color IntToColor( int color )
   return (Color){ colorValues.r, colorValues.g, colorValues.b, colorValues.a };
 }
 
-void DrawTile( void *image, Rectangle sourceRect, Vector2 destPos, float opacity, unsigned int flags)
+void DrawTile( void *image, Rectangle sourceRect, Vector2 destPos, float opacity, unsigned int flags )
 {
   Texture2D *texture = (Texture2D*)image;
 
   int op = 0xFF * opacity;
   DrawTextureRec(*texture, sourceRect, destPos, (Color){op, op, op, op} );
+}
+void DrawTileCollision( tmx_tile *tile, Vector2 destPos )
+{
+  int x = destPos.x; 
+  int y = destPos.y;
+  unsigned int w = tile->width;
+  unsigned int h = tile->height;
+  
+  Rectangle destRect= { .x = x, .y = y, .width = w, .height = h };
+
+  if( tile->collision )
+    DrawRectangleRec(destRect, (Color){ 0, 255, 242, 107 } );
 }
 void DrawTileLayer( tmx_map *map, tmx_layer *layer )
 {
@@ -34,16 +54,17 @@ void DrawTileLayer( tmx_map *map, tmx_layer *layer )
   tmx_tileset *tileset;
   tmx_image *image;
 
-  for( unsigned long columns = 0; columns < map->height; columns++ )
+  for( unsigned long rows = 0; rows < map->width; rows++ )
   {
-    for( unsigned long rows = 0; rows < map->width; rows++ )
+    for( unsigned long columns = 0; columns < map->height; columns++ )
     {
       unsigned int gid = ( layer->content.gids[ (columns * map->width) + rows] ) &TMX_FLIP_BITS_REMOVAL;
+      tmx_tile *tile = map->tiles[gid];
 
-      if( map->tiles[gid] != NULL )
+      if( tile != NULL )
       {
-        tileset = map->tiles[gid]->tileset;
-        image = map->tiles[gid]->image;
+        tileset = tile->tileset;
+        image = tile->image;
         unsigned int x = map->tiles[gid]->ul_x;
         unsigned int y = map->tiles[gid]->ul_y;
         unsigned int w = tileset->tile_width;
@@ -59,11 +80,12 @@ void DrawTileLayer( tmx_map *map, tmx_layer *layer )
         Rectangle sourceRectangle = { .x = x, .y = y, .width = w, .height = h };
         Vector2 destPosition = (Vector2){ rows * tileset->tile_width, columns * tileset->tile_height };
         DrawTile(imagePtr, sourceRectangle, destPosition, opacity, flags);
-      }
+        DrawTileCollision( tile, destPosition );
+        }
     }
   }
-}
 
+}
 
 void* RaylibTexLoad( const char *path )
 {

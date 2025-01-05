@@ -1,7 +1,9 @@
 #ifndef PLAYER_H
 #define PLAYER_H
 
+#include <stdbool.h>
 #include <raylib.h>
+#include <tmx.h>
 
 // structs
 typedef struct Player
@@ -9,13 +11,10 @@ typedef struct Player
   Vector2 position;
   Rectangle hurtbox;
   Vector2 speed;
-  bool canJump;
+  bool collided;
 } Player;
 
-// player related funcs
-void UpdatePlayer( Camera2D *camera, Player *player, int screenWidth, int screenHeight, Rectangle mapRect, float deltaTime );
-void UpdatePlayerCamera( Camera2D *camera, Player *player, int screenWidth, int screenHeight, Rectangle mapRect );
-// utility funcs
-bool CheckForFractionPortion( float number );
-int DeleteFractionPortion( float number );
+void UpdatePlayer( tmx_map *map, Camera2D *camera, Player *player, Vector2 screenDim, Rectangle mapRect, float deltaTime );
+void DrawPlayer( Player *player, bool collision );
+
 #endif

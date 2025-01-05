@@ -1,15 +1,26 @@
+#include <stdint.h>
 #include <stdio.h>
 #include "player.h"
 
+// func declarations
+bool CheckForFractionPortion( float number );
+int DeleteFractionPortion( float number );
+int32_t getGID( tmx_layer *layer, unsigned int mapWidth, unsigned int x, unsigned int y );
 
-void UpdatePlayer( Camera2D *camera, Player *player, int screenWidth, int screenHeight, Rectangle mapRect, float deltaTime )
+void UpdatePlayerCamera( Camera2D *camera, Player *player, int screenWidth, int screenHeight, Rectangle mapRect );
+bool DetectCollision( Player *player, tmx_map *map );
+
+void UpdatePlayer( tmx_map *map, Camera2D *camera, Player *player, Vector2 screenDim, Rectangle mapRect, float deltaTime )
 { 
+  player->collided = DetectCollision(player, map);
+
+  // player controls
   // player directional controls
   if( IsKeyDown(KEY_LEFT) )
   {
     if( player->speed.x > 0 ) // change speed direction
       player->speed.x *= -1;
-    if( player->hurtbox.x > mapRect.x ) // bounds check
+    if( player->hurtbox.x > mapRect.x ) // collision & tilemap bounds check
     {
       player->position.x += (int)(player->speed.x * deltaTime);
       player->hurtbox.x += (int)(player->speed.x * deltaTime);
@@ -50,13 +61,19 @@ void UpdatePlayer( Camera2D *camera, Player *player, int screenWidth, int screen
   if( IsKeyPressed(KEY_R) )
   {
     player->position = (Vector2){ mapRect.width / 2, mapRect.height / 2 };
-    player->hurtbox.x = player->position.x - 8;
-    player->hurtbox.y = player->position.y - 8;
+    player->hurtbox.x = player->position.x - (player->hurtbox.width / 2);
+    player->hurtbox.y = player->position.y - (player->hurtbox.height / 2);
+    camera->target = player->position;
   }
 
-  UpdatePlayerCamera(camera, player, screenWidth, screenHeight, mapRect);
+  UpdatePlayerCamera(camera, player, (int)screenDim.x, (int)screenDim.y, mapRect);
+}
+void DrawPlayer( Player *player, bool collision )
+{
+  DrawRectangleRec(player->hurtbox, BLACK);
 }
 
+// func code
 void UpdatePlayerCamera( Camera2D *camera, Player *player, int screenWidth, int screenHeight, Rectangle mapRect )
 {
   // camera boundary points
@@ -90,7 +107,55 @@ void UpdatePlayerCamera( Camera2D *camera, Player *player, int screenWidth, int 
   if( bottomRightPoint.y < mapRect.height && player->position.y > centerPoint.y && player->speed.y > 0 )
     camera->target.y = player->position.y;
 }
+bool DetectCollision( Player *player, tmx_map *map )
+{
+  int leftTile = player->hurtbox.x / map->tile_width;
+  int rightTile = (player->hurtbox.x + player->hurtbox.width) / map->tile_width;
+  int topTile = player->hurtbox.y / map->tile_height;
+  int bottomTile = (player->hurtbox.y + player->hurtbox.height) / map->tile_height;
+  // debug info
+  printf( "Left: %d\n", leftTile );
+  printf( "Right: %d\n", rightTile );
+  printf( "Top: %d\n", topTile );
+  printf( "Bottom: %d\n", bottomTile );
 
+  // bounds limiting
+  if( leftTile < 0 )
+    leftTile = 0;
+  if( rightTile > map->width )
+    rightTile = map->width;
+  if( topTile < 0 )
+    topTile = 0;
+  if( bottomTile > map->height )
+    bottomTile = map->height;
+
+  bool collisionDetected = false;
+  tmx_layer *layerHead = map->ly_head;
+  while( layerHead )
+  {
+    printf( "Layer Name: %s\n", layerHead->name );
+    for( int columns = leftTile; columns <= rightTile; columns++ )
+    {
+      for( int rows = topTile; rows <= bottomTile; rows++ )
+      {
+        tmx_tile *tile = map->tiles[ getGID(layerHead, map->width, columns, rows) ];
+        if( tile->collision )
+        {
+          printf( "Collision found\n" );
+          printf( "Collision Type: %d\n", tile->collision->obj_type );
+          return true;
+        }
+      }
+    }
+    layerHead = layerHead->next;
+  }
+  return false;
+}
+
+int32_t getGID( tmx_layer *layer, unsigned int mapWidth, unsigned int x, unsigned int y )
+{
+  return layer->content.gids[ (y * mapWidth) + x ];
+}
 bool CheckForFractionPortion( float number )
 {
   float fractionChecker = number - (int)number;
