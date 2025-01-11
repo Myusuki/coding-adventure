@@ -1,0 +1,26 @@
+
+# Consider dependencies only in project.
+set(CMAKE_DEPENDS_IN_PROJECT_ONLY OFF)
+
+# The set of languages for which implicit dependencies are needed:
+set(CMAKE_DEPENDS_LANGUAGES
+  )
+
+# The set of dependency files which are needed:
+set(CMAKE_DEPENDS_DEPENDENCY_FILES
+  "/home/myu/Gitdownloads/coding-adventure/GameDev/TiledPlayground/TilemapCollision/include/mapRender.c" "CMakeFiles/app.dir/include/mapRender.c.o" "gcc" "CMakeFiles/app.dir/include/mapRender.c.o.d"
+  "/home/myu/Gitdownloads/coding-adventure/GameDev/TiledPlayground/TilemapCollision/include/player.c" "CMakeFiles/app.dir/include/player.c.o" "gcc" "CMakeFiles/app.dir/include/player.c.o.d"
+  "/home/myu/Gitdownloads/coding-adventure/GameDev/TiledPlayground/TilemapCollision/main.c" "CMakeFiles/app.dir/main.c.o" "gcc" "CMakeFiles/app.dir/main.c.o.d"
+  "" "/home/myu/Gitdownloads/coding-adventure/GameDev/TiledPlayground/TilemapCollision/app" "gcc" "CMakeFiles/app.dir/link.d"
+  )
+
+# Targets to which this target links which contain Fortran sources.
+set(CMAKE_Fortran_TARGET_LINKED_INFO_FILES
+  )
+
+# Targets to which this target links which contain Fortran sources.
+set(CMAKE_Fortran_TARGET_FORWARD_LINKED_INFO_FILES
+  )
+
+# Fortran module output directory.
+set(CMAKE_Fortran_TARGET_MODULE_DIR "")

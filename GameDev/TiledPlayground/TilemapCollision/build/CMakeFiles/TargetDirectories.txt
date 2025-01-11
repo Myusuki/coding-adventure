@@ -1,0 +1,3 @@
+/home/myu/Gitdownloads/coding-adventure/GameDev/TiledPlayground/TilemapCollision/build/CMakeFiles/app.dir
+/home/myu/Gitdownloads/coding-adventure/GameDev/TiledPlayground/TilemapCollision/build/CMakeFiles/edit_cache.dir
+/home/myu/Gitdownloads/coding-adventure/GameDev/TiledPlayground/TilemapCollision/build/CMakeFiles/rebuild_cache.dir

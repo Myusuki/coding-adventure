@@ -9,7 +9,7 @@
 int main(void)
 {
   const int windowWidth = 800;
-  const int windowHeight = 640;
+  const int windowHeight = 600;
 
   SetWindowSize(windowWidth, windowHeight);
   SetConfigFlags(FLAG_WINDOW_RESIZABLE | FLAG_VSYNC_HINT);
@@ -23,7 +23,7 @@ int main(void)
   tmx_img_load_func = RaylibTexLoad;
   tmx_img_free_func = RaylibTexFree;
 
-  tmx_map *map = tmx_load("../assets/CaveRuinsEntrance.tmx");
+  tmx_map *map = tmx_load("../assets/GameBoyTest.tmx");
   if( map == NULL )
   {
     tmx_perror( "Could not load CaveRuinsEntrance.tmx");
@@ -37,7 +37,7 @@ int main(void)
   // map rectangle
   Rectangle mapRect = { .x = 0, .y = 0, .width = (map->tile_width * map->width), .height = (map->tile_height * map->height) };
   Player player = { .position = (Vector2){ (mapRect.width / 2), (mapRect.height / 2) },
-                   .hurtbox = (Rectangle){ (player.position.x - 16), (player.position.y - 16), 32, 32 },
+                   .hurtbox = (Rectangle){ (player.position.x - 8), (player.position.y - 8), 16, 16 },
                    .speed = (Vector2){ 128, 128 }, .collided = false };
   Camera2D camera = { .target = player.position,
                       .offset = (Vector2){ (windowWidth / 2.0f), (windowHeight / 2.0f) },
@@ -45,6 +45,7 @@ int main(void)
 
   while( !WindowShouldClose() )
   {
+    printf( "Map Tiles: %d\n", map->tilecount );
     printf( "Map Width: %d\n", map->width );
     printf( "Map Height: %d\n", map->height );
     // input handling and logic
@@ -54,7 +55,7 @@ int main(void)
     printf( "Scale Factor: %f\n", scale );
 
     UpdatePlayer(map, &camera, &player, (Vector2){ windowWidth, windowHeight}, mapRect, GetFrameTime() );
-    printf( "Player Collision: %d\n", player.collided );
+    // printf( "Player Collision: %d\n", player.collided );
 
     // draw
     // draw to render texture
