@@ -8,8 +8,12 @@
 
 int main(void)
 {
+  // window dimensions
   const int windowWidth = 800;
   const int windowHeight = 600;
+  // game dimensions
+  const int gameWidth = 800;
+  const int gameHeight = 600;
 
   SetWindowSize(windowWidth, windowHeight);
   SetConfigFlags(FLAG_WINDOW_RESIZABLE | FLAG_VSYNC_HINT);
@@ -23,7 +27,7 @@ int main(void)
   tmx_img_load_func = RaylibTexLoad;
   tmx_img_free_func = RaylibTexFree;
 
-  tmx_map *map = tmx_load("../assets/GameBoyTest.tmx");
+  tmx_map *map = tmx_load("../assets/CaveRuinsEntrance.tmx");
   if( map == NULL )
   {
     tmx_perror( "Could not load CaveRuinsEntrance.tmx");
@@ -31,13 +35,13 @@ int main(void)
   }
 
   // render texture
-  RenderTexture2D targetTexture = LoadRenderTexture(windowWidth, windowHeight);
+  RenderTexture2D targetTexture = LoadRenderTexture(gameWidth, gameHeight);
   SetTextureFilter(targetTexture.texture, TEXTURE_FILTER_BILINEAR);
 
   // map rectangle
   Rectangle mapRect = { .x = 0, .y = 0, .width = (map->tile_width * map->width), .height = (map->tile_height * map->height) };
   Player player = { .position = (Vector2){ (mapRect.width / 2), (mapRect.height / 2) },
-                   .hurtbox = (Rectangle){ (player.position.x - 8), (player.position.y - 8), 16, 16 },
+                   .hurtbox = (Rectangle){ (player.position.x - (map->tile_width / 2.0f) ), (player.position.y - (map->tile_height / 2.0f) ), map->tile_width, map->tile_height },
                    .speed = (Vector2){ 128, 128 }, .collided = false };
   Camera2D camera = { .target = player.position,
                       .offset = (Vector2){ (windowWidth / 2.0f), (windowHeight / 2.0f) },
@@ -62,7 +66,7 @@ int main(void)
     BeginTextureMode(targetTexture);
       BeginMode2D(camera);
         RenderMap(map);
-        DrawPlayer(&player, player.collided);
+        DrawPlayer(&player, map);
       EndMode2D();
     EndTextureMode();
     // draw to screen

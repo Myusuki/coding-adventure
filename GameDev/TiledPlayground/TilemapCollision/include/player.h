@@ -15,6 +15,6 @@ typedef struct Player
 } Player;
 
 void UpdatePlayer( tmx_map *map, Camera2D *camera, Player *player, Vector2 screenDim, Rectangle mapRect, float deltaTime );
-void DrawPlayer( Player *player, bool collision );
+void DrawPlayer( Player *player, tmx_map *map );
 
 #endif

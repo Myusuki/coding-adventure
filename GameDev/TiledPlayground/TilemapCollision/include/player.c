@@ -1,5 +1,7 @@
+#include <raylib.h>
 #include <stdint.h>
 #include <stdio.h>
+#include <tmx.h>
 #include "player.h"
 
 // func declarations
@@ -8,7 +10,8 @@ int DeleteFractionPortion( float number );
 int32_t getGID( tmx_layer *layer, unsigned int mapWidth, unsigned int column, unsigned int row );
 
 void UpdatePlayerCamera( Camera2D *camera, Player *player, int screenWidth, int screenHeight, Rectangle mapRect );
-void DetectCollision( Player *player, tmx_map *map );
+bool DetectCollision( Player *player, tmx_map *map, int direction );
+enum { LEFT = 1, RIGHT, UP, DOWN } direction;
 
 void UpdatePlayer( tmx_map *map, Camera2D *camera, Player *player, Vector2 screenDim, Rectangle mapRect, float deltaTime )
 { 
@@ -18,7 +21,8 @@ void UpdatePlayer( tmx_map *map, Camera2D *camera, Player *player, Vector2 scree
   {
     if( player->speed.x > 0 ) // change speed direction
       player->speed.x *= -1;
-    if( player->hurtbox.x > mapRect.x ) // collision & tilemap bounds check
+    if( !DetectCollision(player, map, LEFT) && player->hurtbox.x > mapRect.x ) // collision & tilemap bounds check
+    // if( player->hurtbox.x > mapRect.x ) // collision & tilemap bounds check
     {
       player->position.x += (int)(player->speed.x * deltaTime);
       player->hurtbox.x += (int)(player->speed.x * deltaTime);
@@ -28,7 +32,8 @@ void UpdatePlayer( tmx_map *map, Camera2D *camera, Player *player, Vector2 scree
   {
     if( player->speed.x < 0 )
       player->speed.x *= -1;
-    if( (player->hurtbox.x + player->hurtbox.width) < mapRect.width ) // bounds check
+    if( !DetectCollision(player, map, RIGHT) && (player->hurtbox.x + player->hurtbox.width) < mapRect.width ) // bounds check
+    // if( (player->hurtbox.x + player->hurtbox.width) < mapRect.width ) // bounds check
     {
       player->position.x += (int)(player->speed.x * deltaTime);
       player->hurtbox.x += (int)(player->speed.x * deltaTime);
@@ -38,7 +43,8 @@ void UpdatePlayer( tmx_map *map, Camera2D *camera, Player *player, Vector2 scree
   {
     if( player->speed.y > 0 )
       player->speed.y *= -1;
-    if( player->hurtbox.y > mapRect.y ) // bounds check
+    if( !DetectCollision(player, map, UP) && player->hurtbox.y > mapRect.y ) // bounds check
+    // if( player->hurtbox.y > mapRect.y ) // bounds check
     {
       player->position.y += (int)(player->speed.y * deltaTime);
       player->hurtbox.y += (int)(player->speed.y * deltaTime);
@@ -48,7 +54,8 @@ void UpdatePlayer( tmx_map *map, Camera2D *camera, Player *player, Vector2 scree
   {
     if( player->speed.y < 0 )
       player->speed.y *= -1;
-    if( (player->hurtbox.y + player->hurtbox.height) < mapRect.height ) // bounds check
+    if( !DetectCollision(player, map, DOWN) && (player->hurtbox.y + player->hurtbox.height) < mapRect.height ) // bounds check
+    // if( (player->hurtbox.y + player->hurtbox.height) < mapRect.height ) // bounds check
     {
       player->position.y += (int)(player->speed.y * deltaTime);
       player->hurtbox.y += (int)(player->speed.y * deltaTime);
@@ -64,10 +71,14 @@ void UpdatePlayer( tmx_map *map, Camera2D *camera, Player *player, Vector2 scree
     camera->target = player->position;
   }
 
-  DetectCollision(player, map);
+  int xTile = (int)( ( (player->position.x) / map->tile_height) );
+  int yTile = (int)( ( (player->position.y) / map->tile_height) );
+  printf( "Player X Tile: %d\n", xTile );
+  printf( "Player Y Tile: %d\n", yTile );
+
   UpdatePlayerCamera(camera, player, (int)screenDim.x, (int)screenDim.y, mapRect);
 }
-void DrawPlayer( Player *player, bool collision )
+void DrawPlayer( Player *player, tmx_map *map )
 {
   DrawRectangleRec(player->hurtbox, BLACK);
 }
@@ -106,51 +117,106 @@ void UpdatePlayerCamera( Camera2D *camera, Player *player, int screenWidth, int 
   if( bottomRightPoint.y < mapRect.height && player->position.y > centerPoint.y && player->speed.y > 0 )
     camera->target.y = player->position.y;
 }
-void DetectCollision( Player *player, tmx_map *map )
+bool DetectCollision( Player *player, tmx_map *map, int direction )
 {
-  int leftTile = player->hurtbox.x / map->tile_width;
-  int rightTile = (player->hurtbox.x + player->hurtbox.width) / map->tile_width;
-  int topTile = player->hurtbox.y / map->tile_height;
-  int bottomTile = (player->hurtbox.y + player->hurtbox.height) / map->tile_height;
-
-  // bounds limiting
-  if( leftTile < 0 )
-    leftTile = 0;
-  if( rightTile >= map->width )
-    rightTile = map->width - 1;
-  if( topTile < 0 )
-    topTile = 0;
-  if( bottomTile >= map->height )
-    bottomTile = map->height - 1;
-
-  // debug info
-  printf( "Left: %d\n", leftTile );
-  printf( "Right: %d\n", rightTile );
-  printf( "Top: %d\n", topTile );
-  printf( "Bottom: %d\n", bottomTile );
-
+  int xTile = 0, yTile = 0;
+  int gid;
+  tmx_tile *tile;
   bool collisionDetected = false;
   tmx_layer *layerHead = map->ly_head;
   while( layerHead )
   {
     printf( "Layer Name: %s\n", layerHead->name );
-    for( int column = leftTile; column <= rightTile; column++ )
+    switch( direction )
     {
-      for( int row = topTile; row <= bottomTile; row++ )
-      {
-        int32_t GID = getGID(layerHead, map->width, column, row);
-        printf( "GID: %d\n", GID );
-        tmx_tile *tile = map->tiles[ GID ];
-        if( GID != 0 && tile->collision )
-        {
-          printf( "Collision Detected\n" );
-          printf( "Collision Type: %d\n", tile->collision->obj_type );
-        }
-      }
+      case LEFT:
+          xTile = (int)( ( (player->position.x - (player->hurtbox.width / 2) - 1) / map->tile_width) );
+          yTile = (int)( ( (player->position.y) / map->tile_height) );
+          printf( "X Tile: %d\n", xTile );
+          printf( "Y Tile: %d\n", yTile );
+          
+          if( xTile <= 0 )
+            xTile = 0;
+          else if( xTile >= map->width - 1 )
+            xTile = map->width - 1;
+          if( yTile <= 0 )
+            yTile = 0;
+          else if( yTile >= map->height - 1)
+            yTile = map->height - 1;
+
+          gid = getGID(layerHead, map->width, xTile, yTile);
+          tile = map->tiles[gid];
+          if( gid != 0 && tile->collision )
+            collisionDetected = true;
+        break;
+      case RIGHT:
+          xTile = (int)( ( (player->position.x + (player->hurtbox.width / 2) ) / map->tile_width) );
+          yTile = (int)( ( (player->position.y) / map->tile_height) );
+          printf( "X Tile: %d\n", xTile );
+          printf( "Y Tile: %d\n", yTile );
+
+          if( xTile <= 0 )
+            xTile = 0;
+          else if( xTile >= map->width - 1 )
+            xTile = map->width - 1;
+          if( yTile <= 0 )
+            yTile = 0;
+          else if( yTile >= map->height - 1)
+            yTile = map->height - 1;
+
+          gid = getGID(layerHead, map->width, xTile, yTile);
+          tile = map->tiles[gid];
+          if( gid && tile->collision )
+            collisionDetected = true;
+        break;
+      case UP:
+          xTile = (int)( ( (player->position.x) / map->tile_width) );
+          yTile = (int)( ( (player->position.y - (player->hurtbox.height/ 2) - 1) / map->tile_height) );
+          printf( "X Tile: %d\n", xTile );
+          printf( "Y Tile: %d\n", yTile );
+
+          if( xTile <= 0 )
+            xTile = 0;
+          else if( xTile >= map->width - 1 )
+            xTile = map->width - 1;
+          if( yTile <= 0 )
+            yTile = 0;
+          else if( yTile >= map->height - 1)
+            yTile = map->height - 1;
+
+          gid = getGID(layerHead, map->width, xTile, yTile);
+          tile = map->tiles[gid];
+          if( gid && tile->collision )
+            collisionDetected = true;
+        break;
+      case DOWN:
+          xTile = (int)( ( (player->position.x) / map->tile_width) );
+          yTile = (int)( ( (player->position.y + (player->hurtbox.height/ 2) ) / map->tile_height) );
+          printf( "X Tile: %d\n", xTile );
+          printf( "Y Tile: %d\n", yTile );
+
+          if( xTile <= 0 )
+            xTile = 0;
+          else if( xTile >= map->width - 1 )
+            xTile = map->width - 1;
+          if( yTile <= 0 )
+            yTile = 0;
+          else if( yTile >= map->height - 1)
+            yTile = map->height - 1;
+
+          gid = getGID(layerHead, map->width, xTile, yTile);
+          tile = map->tiles[gid];
+          if( gid && tile->collision )
+            collisionDetected = true;
+        break;
     }
     layerHead = layerHead->next;
   }
 
+  if( collisionDetected )
+    printf( "Collision Detected\n" );
+
+  return collisionDetected;
 }
 
 int32_t getGID( tmx_layer *layer, unsigned int mapWidth, unsigned int column, unsigned int row )
