@@ -10,7 +10,7 @@ int main(void)
   // InitWindow(windowWidth, windowHeight, "Tiled Playground");
   // SetTargetFPS(60);
 
-  tmx_map *map = tmx_load("./assets/GameBoyTest.tmx");
+  tmx_map *map = tmx_load("./assets/CaveRuinsEntrance.tmx");
   char *formatVersion = map->format_version;
   char *classString = map->class_type; // NULL if not user defined or found in tmx file
   int orientation = map->orient; // enums default to 0 for the first enum member
@@ -28,19 +28,34 @@ int main(void)
   unsigned int mapTilecount = map->tilecount;
   tmx_tile **mapTiles = map->tiles;
 
+
   while( tilesetHead )
   {
     printf( "%s\n", tilesetHead->source);
     tmx_tileset *tileset = tilesetHead->tileset;
     printf( "Tileset Tilecount: %d\n", tileset->tilecount );
-    tmx_tile checkTile = tileset->tiles[57];
-    unsigned int checkTileCollision = checkTile.collision->obj_type;
-    printf( "Tile Collision Type: %d\n", checkTileCollision );
+    // tmx_tile checkTile = tileset->tiles[57];
+    // unsigned int checkTileCollision = checkTile.collision->obj_type;
+    // printf( "Tile Collision Type: %d\n", checkTileCollision );
 
     tilesetHead = tilesetHead->next;
   }
   while( layerHead != NULL )
   {
+    tmx_layer *layer = layerHead;
+    // for( int row = 0; row < map->height; row++ )
+    // {
+    //   for( int column = 0; column < map->width; column++ )
+    //   {
+    //     int32_t cell = layer->content.gids[row * map->width + column];
+    //     int32_t GID = cell & TMX_FLIP_BITS_REMOVAL;
+    //     printf( "Column: %d, Row: %d\n", column, row );
+    //   }
+    // }
+    int32_t cell = layer->content.gids[ 7 * map->width + 0 ];
+    int32_t GID = cell & TMX_FLIP_BITS_REMOVAL;
+    tmx_tile *tile = map->tiles[ GID ];
+    printf( "Tile found!\n" );
     printf( "%s\n", layerHead->name );
     layerHead = layerHead->next;
   }

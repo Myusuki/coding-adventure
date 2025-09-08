@@ -54,7 +54,10 @@ int main(void)
 
   while( !WindowShouldClose() )
   {
+    printf( "Screen Width: %d\n", GetScreenWidth() );
+    printf( "Screen Height: %d\n", GetScreenHeight() );
     float scale = MIN( (float)GetScreenWidth() / windowWidth, (float)GetScreenHeight() / windowHeight );
+    printf( "Scale Factor: %f\n", scale );
 
     UpdatePlayer(&camera, &player, windowWidth, windowHeight, mapRect, GetFrameTime() );
 

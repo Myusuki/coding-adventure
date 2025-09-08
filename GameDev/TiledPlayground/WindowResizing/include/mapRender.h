@@ -4,14 +4,6 @@
 #include <raylib.h>
 #include <tmx.h>
 
-// window dimensions
-#define windowWidth 800
-#define windowHeight 640
-
-// game screen dimensions
-#define gameScreenWidth 800
-#define gameScreenHeight 640
-
 // map render functions
 // main render function
 void RenderMap( tmx_map *map );

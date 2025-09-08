@@ -6,7 +6,7 @@
 
 // window dimensions
 #define windowWidth 800
-#define windowHeight 640
+#define windowHeight 600
 
 // map render functions
 // tmx callback glob funcs
